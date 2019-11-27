@@ -1,0 +1,38 @@
+#podesavanje{
+  display: none;
+}
+#povratak_na_pocetnu_update{
+  float:right;
+}
+#obrisi_nalog{
+  float:right;
+  margin-right: 15px;
+}
+#naslov_update{
+  float:left;
+}
+#sacuvaj_promene{
+  float:right;
+}
+#odabir_jezika{
+  float: right;
+  margin-right: 15px;
+}
+#odabir_boje_pozadine{
+  float: right;
+  margin-right: 15px;
+}
+#default_boja{
+  background-color:rgb(255, 255, 255);
+  color:black;
+}
+#svetlo_siva_boja{
+  background-color:rgb(202, 204, 206);
+  color:black;
+}
+#srednje_siva_boja{
+  background-color:rgb(134, 136, 138);
+}
+#tamno_siva_boja{
+  background-color:rgb(49, 51, 53);
+}

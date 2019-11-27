@@ -1,0 +1,324 @@
+
+#gore{
+  border:3px solid red;
+}
+#slika{
+  width:200px;
+  height:200px;
+  float:right;
+  margin-right: 60px;
+}
+#kreiraj_fakturu{
+  margin-bottom: 2px;
+}
+#tabla{
+    color:#34232b;
+    background-color:#ffca00;
+}
+#donji_red_tabele_index{
+  color:#ffca00;
+  background-color: #34232b;
+}
+.dugmici_otvori_pocetna{
+  color:#34232b;
+  background-color:#ffca00;
+}
+.dugmici_izmeni_pocetna{
+  color:#34232b;
+  background-color:#ffca00;
+}
+#oznaka_dokumenta{
+  margin:auto;
+}
+#oznaka_dokumenta{
+  margin:auto;
+}
+#oznaka_dokumenta{
+  font-size: 25px;
+  color:#9dd728;
+}
+
+
+ #crtezi{
+   display:none;
+ }
+ /* .leva_kocka{
+   height: 7.5cm;
+   width:35%;
+   margin-top: 4px;
+   margin-bottom: 4px;
+   padding:2px;
+   border: 2px solid black;
+   display: block;
+ }
+ .srednja_kocka{
+   height: 7.5cm;
+   width: 4%;
+   display: block;
+ }
+ .desna_kocka{
+   height: 7.5cm;
+   width:60%;
+   margin-top: 4px;
+   margin-bottom: 5px;
+   padding:2px;
+   border: 2px solid black;
+   display: block;
+ } */
+ .swal-overlay {
+   background-color: rgba(43, 165, 137, 0.45);
+ }
+ #lokacija_firme_na_pocetnoj{
+   font-size: 22px;
+ }
+ #adresa_firme_na_pocetnoj{
+   font-size: 22px;
+ }
+ #wait{
+  position: fixed;
+  top: 40%;
+  left: 47%;
+  z-index: 1;
+ }
+ #slika_logo{
+   float:right;
+ }
+ #slika_logo_pocetna{
+   float:right;
+   position: relative;
+   top: 50px;
+   left: 127px;
+ }
+#samo_modal_promena_logoa{
+  background-color: lightgray;
+  border:2px solid black;
+}
+#dugme_za_povratak_na_vrh{
+  background-color: red;
+  padding: 5px;
+  border-radius: 20px;
+  display: none;
+  border:1px solid black;
+	position:fixed;
+	bottom:20px;
+	left:20px;
+	z-index: 10;
+}
+#dugme_za_slanje_poruke_podrsci{
+  background-color: red;
+  padding: 9px;
+  border-radius: 20px;
+  border:1px solid black;
+  width: 43px;
+  margin-top: 3px;
+	position:fixed;
+	bottom:20px;
+	right:20px;
+	z-index: 10;
+}
+
+#poruka_adminu{
+  height:410px;
+  width: 220px;
+  border-radius: 20px;
+  background-color:orange;
+  border: 1px solid black;
+  display: none;
+  z-index: 10;
+  position:fixed;
+	   bottom:80px;
+	   right:20px;
+}
+
+#naslov_korisnika_koji_mi_salje_poruke{
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+#email_korisnika_koji_mi_salje_poruke{
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 5px;
+}
+#poruka_korisnika_koji_mi_salje_poruke{
+  width: 90%;
+  height: 200px;
+  max-height: 200px;
+  display: table;
+  margin:0 auto;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+#dugme_posalji_korisnika_koji_mi_salje_poruke{
+  float: right;
+  margin-right: 5%;
+  margin-top: 15px;
+  border-radius: 20px;
+}
+#slikica_o_slanju_emaila_od_korisnika{
+  float: left;
+  margin-left: 5%;
+  margin-top: 15px;
+  display: none;
+}
+#div_izbor_godine{
+  display: inline-block;
+  position: relative;
+  top: 26px;
+  left: -95px;
+  z-index: 1;
+}
+#izbor_godine{
+  z-index: 10;
+  width: 180px;
+}
+#div_izbor_statusa_select{
+  display: inline-block;
+  position: relative;
+  top: 26px;
+  left: -24px;
+  z-index: 11;
+}
+#izbor_statusa_select{
+  width: 163px;
+}
+#div_izbor_firme_select{
+  display: inline-block;
+  position: relative;
+  top: 26px;
+  left: 24px;
+  z-index: 10;
+}
+#izbor_firme_select{
+  width: 185px;
+}
+#ceo_div_na_stanici_prikaz_klijenta{
+  display: none;
+}
+#prikaz_korisnika_naslov{
+  font-style: italic;
+  text-align: center;
+}
+#div_gornji_deo_na_stanici_prikaz_klijenta{
+  display: none;
+  height: 40px;
+}
+#prva_kolona_prikaz_klijenta{
+height: 230px;
+border-bottom: 2px solid black;
+}
+#druga_kolona_prikaz_klijenta{
+height: 230px;
+border-bottom: 2px solid black;
+}
+#treca_kolona_prikaz_klijenta{
+  height: 230px;
+  border-bottom: 2px solid black;
+}
+@media only screen and (max-width: 600px) {
+  #prva_kolona_prikaz_klijenta {
+    background-color: orange;
+    border-bottom: 1px solid black;
+    border-radius: 0px 0px 20px 20px;
+  }
+  #druga_kolona_prikaz_klijenta {
+    background-color: lightblue;
+    border-top: 1px solid black;
+    border-radius: 20px 20px 20px 20px;
+  }
+  #treca_kolona_prikaz_klijenta {
+    background-color: lightgreen;
+    border-top: 1px solid black;
+    border-radius: 20px 20px 0px 0px;
+  }
+}
+#label_pib_komintenta_prikaz_klijenta{
+  margin-top: 15px;
+}
+#label_email_komintenta_prikaz_klijenta{
+  margin-top: 15px;
+}
+#prikaz_klijenta_promena_imena{
+  border-radius: 10px;
+  display: none;
+}
+#promeni_osnovne_podatke_o_klijentu{
+  position: absolute;
+  bottom: 50px;
+  right: 15px;
+}
+#promeni_osnovne_podatke_o_klijentu_dugme_sacuvaj{
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  right: 15px;
+}
+#prikaz_klijenta_promena_piba{
+  border-radius: 10px;
+  display: none;
+}
+#prikaz_klijenta_promena_lokacije{
+  border-radius: 10px;
+  display: none;
+}
+#prikaz_klijenta_promena_emaila{
+  border-radius: 10px;
+  display: none;
+}
+#donji_red_prikaz_korisnikovih_faktura_u_tabeli{
+ display: none;
+}
+#donja_navigacija{
+  height:60px;
+}
+#div_izbor_godine_prikaz_klijenta_stranica{
+  display: inline-block;
+  position: relative;
+  top: 25px;
+  left: 110px;
+  z-index: 1;
+}
+#div_izbor_statusa_prikaz_klijenta_stranica{
+  display: inline-block;
+  position: relative;
+  top: 25px;
+  left: 110px;
+  z-index: 1;
+}
+#nazad_sa_stanice_prikaz_klijenta{
+  float: right;
+}
+#napravi_novu_fakturu_dugme_prikaz_klijenta{
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+}
+#dobrodoslica{
+  display: none;
+  height:500px;
+  width:500px;
+  background-color: red;
+  z-index: 30;
+  padding: 0px 20px 0px 20px;
+  position: fixed;
+  top: 10%;
+  left: 25%;
+}
+#naslov_dobrodoslice{
+  text-align: center;
+  margin-bottom: 20px;
+}
+#podnaslov_dobrodoslice{
+  text-align: center;
+  margin-bottom: 20px;
+}
+#zatvori_div_dobrodoslice{
+  position: absolute;
+  right: 20px;
+  bottom:20px;
+}
+#lg{
+  /* display: none; */
+  /* background-color: lightgray; */
+  height: 500px;
+}

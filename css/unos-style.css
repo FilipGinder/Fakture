@@ -1,0 +1,150 @@
+#sve_na_unos_faktura_stranici{
+  display:none;
+}
+#osnovni_podaci{
+  position: absolute;
+  left: 0px;
+  bottom: 25px;
+}
+#select_odabira_valute{
+  width:180px;
+  height: 25px;
+  border-radius: 10px;
+}
+#logo_unos_faktura{
+  position: absolute;
+  right: 0px;
+  bottom: 90px;
+  /* transform: rotate(30deg); */
+}
+.polja{
+  width:60px;
+}
+#red_osnovni_podaci{
+  border: 1px solid black;
+}
+#polje_iznos_pdv{
+  width:80px;
+}
+#polje_vrednost_sa_pdv{
+  width:80px;
+}
+#podaci_iz_fakture{
+display: none;
+border: 1px solid black;
+max-height: 360px;
+overflow: auto;
+}
+#povratak_na_pocetnu{
+  margin-bottom: 1px;
+  z-index: 100;
+}
+ [type="date"]::-webkit-inner-spin-button {  /* iskljucuje male strelice za pomeranje dan po dan...godina po godina */
+  display: none;
+}
+[type="date"] {
+   background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ; /* postavlja slicicu kalendara za izbor */
+   border: none;
+   border-radius: 10px;
+}
+ [type="date"]::-webkit-calendar-picker-indicator { /*  iskljucuje strelicu za kalendar na deutumu */
+  opacity: 0;
+}
+#ime_primaoca{
+  border-radius: 10px;
+}
+#partnerov_Email{
+  border-radius: 10px;
+}
+#partnerov_PIB{
+  border-radius: 10px;
+}
+#objekat{
+border-radius: 10px;
+}
+#ukupne_cifre{
+  display:none;
+  height: 100px;
+}
+#greske{
+  display:none;
+  text-align: center;
+}
+.swal-modal {
+  background-color: rgba(63,255,106,0.69);
+  border: 3px solid white;
+}
+#text_ukupaa_cena_bez_pdv{
+  display: inline-block;
+  height:30px;
+  width:12%;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+#ukupaa_cena_bez_pdv{
+ display: inline-block;
+ color: red;
+}
+#text_ukupan_iznos_pdv{
+display: inline-block;
+height:30px;
+width:12%;
+text-align: center;
+vertical-align: middle;
+margin-right: 10px;
+margin-left: 10px;
+}
+#ukupan_iznos_pdv{
+display: inline-block;
+color: red;
+}
+#text_ukupan_rabat{
+display: inline-block;
+height:30px;
+width:12%;
+text-align: center;
+vertical-align: middle;
+margin-right: 10px;
+margin-left: 10px;
+}
+#ukupan_rabat{
+display: inline-block;
+color: red;
+}
+#text_ukupna_ukupna_vrednost{
+display: inline-block;
+height:30px;
+width:12%;
+text-align: center;
+vertical-align: middle;
+margin-right: 10px;
+margin-left: 10px;
+}
+#ukupna_ukupna_vrednost{
+display: inline-block;
+color: red;
+}
+#sacuvaj_fakturu{
+  margin-right: 30px;
+  display: none;
+}
+#odbaci_fakturu{
+  margin-right: 15px;
+  display: none;
+}
+#samo_ukupni_iznosi{
+  display: none;
+}
+
+/* .swal-overlay {
+  background-color: rgba(43, 165, 137, 0.45);
+} */
+
+/* #plus{
+
+}
+ tr:nth-child(n + 13) {   /* OVIM U CSS-U OGRANICAVAMO MAXIMALAN BROJ KLONIRANIH REDOVA.... */
+ visibility: hidden;          /*   DA NE BI BILO PROBLEMA PRILIKOM STAMPANJA I ISPADANJA VAN PAPITA SAMO TREBA JOS OVO TESTIRATI KOLIKO REDOVA MOZE MAXIMALNO */
+} */
