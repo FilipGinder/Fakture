@@ -1,0 +1,974 @@
+body{
+  /* background: url('../slika/orig.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment:fixed; */
+}
+
+@media only screen and (max-width: 600px) {
+  #rezervna_navigacija {
+    display: none;
+  }
+  #slika_fakture{
+    width: 350px;
+    height: 500px;
+    position: absolute;
+    top: 40px;
+    left: 15px;
+    box-shadow: 10px 10px 5px;
+  }
+  #bocni_facebook{
+    position: fixed;
+    top: 9px;
+    right:170px;
+    z-index: 10000;
+  }
+  #bocni_viber_osnova{
+    position: fixed;
+    top: 9px;
+    right:210px;
+    z-index: 10000;
+  }
+  #dugme_navigacije_sa_telefona{
+    background-color: red;
+  }
+  #navbarNavDropdown{
+    text-align: center;
+    height: 100%;
+   width: 100%;
+   position: fixed;
+   z-index: 1;
+   top: 0;
+   left: 0;
+   background-image: url('../slika/magla-borovi.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment:fixed;
+   overflow-x: hidden;
+   padding-top: 100px;
+  }
+  #logo_u_navigaciji_za_telefon{
+    display: none;
+    position: absolute;
+    top: 0px;
+    height: 100px;
+    width: 100%;
+    border-bottom: 1px solid black;
+  }
+
+  #zatvori_navigaciju_telefon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  #meni_index{
+    width: 100%;
+    height: 60px;
+    background-color: yellow;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+  }
+
+  #forma{
+    width: 90%;
+    position: relative;
+    top: 30px;
+  }
+  #engleski_slika{
+  position: fixed;
+  top: 5px;
+  right:70px;
+  z-index: 10000;
+  }
+  #srpski_slika{
+  position: fixed;
+  top: 5px;
+  right: 10px;
+  z-index: 5000;
+  }
+ #okvir{
+   width: 90%;
+   position: relative;
+   top: 30px;
+   margin-left: 7px;
+   margin-right: 7px;
+ }
+}
+
+
+
+
+
+
+
+#wait{
+  position: fixed;
+  top: 40%;
+  left: 47%;
+  z-index: 1;
+}
+#obavestenje_o_slanju_emaila{
+  display: none;
+  width: 100%;
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 0px;
+  text-align: center;
+  z-index: 1;
+}
+#logo_u_navigaciji_za_telefon{
+  display: none;
+}
+#zatvori_navigaciju_telefon{
+  display: none;
+}
+#rotirajuci_logo{
+  display: none;
+  position: absolute;
+   top: 40%;
+   left: 25%;
+   width: 50%;
+   height: 20%;
+   z-index: -1;
+}
+#prva_lista{
+  position: relative;
+  top: 40px;
+}
+#prva_lista > h2{
+  color:darkgray;
+}
+#prva_lista > ul{
+  background-color: rgb(0,0,0,0.2);
+  color:white;
+  font-size: 18px;
+}
+#slika_fakture{
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  box-shadow: 10px 10px 5px;
+}
+
+#bocne_ikonice{
+	position: fixed;
+  left: 0px;
+	top:45%;
+	z-index: 2;
+}
+#bocni_facebook{
+	height:40px;
+	width:40px;
+}
+#bocni_viber{
+	height:40px;
+	width:40px;
+	display: block;
+}
+#background-carousel{
+	position:absolute;
+	width:100%;
+	height:1000px;
+	z-index:-1;
+}
+#okolo_sve_na_index_strani{  /* div u kome se nalaze setajuce slike i u kom se nalazi div sa vavigacijom i prvi kontejner */
+  width: 100%;
+}
+#text_o_nama_naslov{
+  text-align: center;
+  color: darkgray;
+}
+.text_o_nama{
+  text-align: center;
+  color: darkgray;
+  font-size: 20px;
+}
+.text_kontakt{
+  text-align: center;
+  color: darkgray;
+  font-size: 20px;
+}
+#text_kontakt_pozovite_nas{
+  margin-top: 25px;
+  text-align: center;
+}
+#text_kontakt_pozovite_nas1{
+  text-align: center;
+  font-size: 20px;
+  background-color: black;
+  color:white;
+  padding: 2px 5px 2px 5px;
+}
+#text_kontakta_pasus_adresa{
+  margin-top: 25px;
+  text-align: center;
+  color:darkgray;
+  font-size: 20px;
+}
+#text_kontakta_pasus_grad{
+  text-align: center;
+  color:darkgray;
+  font-size: 20px;
+}
+#text_kontakta_pasus_postanski_broj{
+  text-align: center;
+  color:darkgray;
+  font-size: 20px;
+}
+#broj_kontakt_pozovite_nas{
+  text-align: center;
+  font-size: 22px;
+}
+#broj_kontakt_pozovite_nas_link{
+  text-decoration: none;
+  color: rgb(12,255,0);
+}
+#broj_kontakt_pozovite_nas_link:hover{
+  color: darkgray;
+}
+#text_kontakt_email{
+  text-align: center;
+  font-size: 20px;
+  margin-top: 25px;
+}
+#text_kontakt_email_link{
+  text-decoration: none;
+  color: rgb(12,255,0);
+}
+#text_kontakt_email_link:hover {
+  color:white;
+}
+.podnaslovi_kontakt{
+  color: darkgray;
+  font-size: 32px;
+  text-align: center;
+}
+.slike_u_kontakt_divu{
+  display: block;
+  margin: 0 auto;
+}
+#stupite_u_kontakt_sa_nama{
+  color: darkgray;
+  font-size: 45px;
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 40px;
+}
+#input_ime_iz_kontakt_diva{
+    background: transparent;
+    border: 2px solid gray;
+    border-radius: 8px;
+    font-size: 20px;
+}
+#input_ime_iz_kontakt_diva:focus{
+  box-shadow: none;
+}
+#label_ime_iz_kontakt_diva{
+  text-align: center;
+  color: gray;
+  font-size: 20px;
+  margin-top: 15px;
+}
+#input_email_iz_kontakt_diva{
+    background: transparent;
+    border: 2px solid gray;
+    border-radius: 8px;
+    font-size: 20px;
+}
+#input_email_iz_kontakt_diva:focus{
+  box-shadow: none;
+}
+#label_email_iz_kontakt_diva{
+  text-align: center;
+  color: gray;
+  font-size: 20px;
+  margin-top: 15px;
+}
+#input_naslov_iz_kontakt_diva{
+    background: transparent;
+    border: 2px solid gray;
+    border-radius: 8px;
+    font-size: 20px;
+}
+#input_naslov_iz_kontakt_diva:focus{
+  box-shadow: none;
+}
+#label_naslov_iz_kontakt_diva{
+  text-align: center;
+  color: gray;
+  font-size: 20px;
+  margin-top: 15px;
+}
+#textarea_poruka_iz_kontakt_diva{
+    background: transparent;
+    border: 2px solid gray;
+    border-radius: 8px;
+    font-size: 20px;
+    resize: none;
+    margin-bottom: 45px;
+}
+#textarea_poruka_iz_kontakt_diva:focus{
+  box-shadow: none;
+}
+#label_textarea_iz_kontakt_diva{
+  text-align: center;
+  color: gray;
+  font-size: 20px;
+  margin-top: 15px;
+}
+#posalji_email_kontakt_div{
+  padding: 15px 30px 15px 30px;
+  border-radius: 8px;
+  background-color: aqua;
+  color: white;
+  margin: 0 auto;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 130px;
+}
+#resetuj_email_kontakt_div{
+  padding: 15px 30px 15px 30px;
+  border-radius: 8px;
+  background-color: rgb(232,214,7);
+  color: white;
+  display: inline-block;
+  margin: 0 auto;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 130px;
+}
+#kako_do_nas_mapa{
+  text-align: center;
+  font-size: 45px;
+  color: darkgray;
+}
+
+#sve_na_index_strani{     /* prvi kontejner */
+  height:1000px;
+  width: 100%;
+}
+#drugi_kontejner_okvir_zbog_pozadine{
+	display: block;
+	width: 100%;
+  min-height: 650px;
+	background-color: rgb(49,57,86);
+  padding-right: 5px;
+}
+#drugi_kontejner{
+	display: block;
+  padding-bottom: 50px;
+}
+#o_nama_naslov{
+	color: darkgray;
+	font-size: 60px;
+	text-align: center;
+	margin-top: 150px;
+}
+#cenovnik_naslov{
+	color: darkgray;
+	font-size: 60px;
+	text-align: center;
+	margin-top: 150px;
+  margin-bottom: 50px;
+}
+#pasus_o_odabiru_paketa{
+  color: darkgray;
+  text-align: center;
+  font-size: 25px;
+}
+#kontakt_naslov{
+	color: darkgray;
+	font-size: 60px;
+	text-align: center;
+	margin-top: 150px;
+}
+#treci_kontejner_okvir_zbog_pozadine{
+	display: block;
+	width: 100%;
+	height:1100px;
+	background: url('../slika/pozdrav veca.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment:fixed;
+	/* background-color: purple; */
+}
+#treci_kontejner{
+	display: block;
+	height:1100px;
+}
+#cetvrti_kontejner_okvir_zbog_pozadine{
+	display: block;
+	width: 100%;
+	background-color: rgb(49,57,86);
+}
+#cetvrti_kontejner{
+	display: block;
+}
+#div_prva_cena{
+  height: 600px;
+}
+#div_prva_cena_unutra{
+  height: 500px;
+  width: 90%;
+  background-color: rgb(41,139,140);
+  margin: 0 auto;
+  border-radius: 8px;
+  padding-top: 10px;
+}
+#naslov_osnovna_cena{
+  text-align: center;
+  color: white;
+}
+#div_druga_cena{
+  height: 600px;
+}
+#div_druga_cena_unutra{
+  height: 500px;
+  width: 90%;
+  background-color: rgb(57,180,160);
+  margin: 0 auto;
+  border-radius: 8px;
+  padding-top: 10px;
+}
+#naslov_standardna_cena{
+  text-align: center;
+  color: white;
+}
+#div_treca_cena{
+  height: 600px;
+}
+#div_treca_cena_unutra{
+  height: 500px;
+  width: 90%;
+  background-color: rgb(68,209,175);
+  margin: 0 auto;
+  border-radius: 8px;
+  padding-top: 10px;
+}
+#naslov_napredna_cena{
+  text-align: center;
+  color: white;
+}
+#peti_kontejner_okvir_zbog_pozadine{
+	display: block;
+	width: 100%;
+	height:300px;
+	background: url('../slika/mali blok.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment:fixed;
+}
+#peti_kontejner{
+	display: block;
+	height:1000px;
+}
+#sesti_kontejner_okvir_zbog_pozadine{
+	display: block;
+	width: 100%;
+	background-color: rgb(49,57,86);
+}
+#sesti_kontejner{
+	display: block;
+}
+#sedmi_kontejner_okvir_zbog_pozadine{
+	display: block;
+	width: 100%;
+	background-color: rgb(49,57,86);
+}
+#sedmi_kontejner{
+	display: block;
+}
+#video_uputstva_naslov{
+  color: darkgray;
+	font-size: 60px;
+	text-align: center;
+	margin-top: 150px;
+}
+.dugmici_pomocna_navigacija{
+	font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  color:white;
+	margin-right: 15px;
+	padding: 7px;
+	cursor: pointer;
+}
+#exampleModal{
+  width:640px;
+  margin:auto;
+}
+#logovanje_div{
+  display: none;
+
+}
+#forma{
+  margin:auto;
+  background-color: rgb(232, 166, 58);
+  box-shadow: 10px 10px 5px;
+  border-radius: 5px;
+}
+#poslednji_div_u_login_boxu{
+  width: 106.8%;
+  position: relative;
+  left: -3.3%;
+  border-radius: 5px;
+  background-color: rgb(191, 107, 7);
+}
+.field-icon {
+  float: right;
+  margin-right: 8px;   /* OKO ZA PRIKAZ I SKRIVANJE PASSWORDA */
+  margin-top: -23px;
+  position: relative;
+  z-index: 2;
+  cursor:pointer;
+}
+#poslednji_div_u_login_boxu > p{
+text-align: center;
+}
+#link_zaboravljena_lozinka{
+  text-decoration: none;
+  color:rgb(32,255,13);
+  background-color: rgb(255,255,255,0);
+}
+#link_zaboravljena_lozinka:hover{
+  color:red;
+}
+#label_zapamti_me{
+  color:rgb(32,255,13);
+}
+.swal-modal {
+  background-color: rgba(63,255,106,0.69);
+  border: 3px solid white;
+}
+select {
+  float: right;
+  width: 150px;
+  padding: 5px 35px 5px 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url('../slika/gear.png') 96% / 15% no-repeat #eee;
+}
+.opcije{
+  background-color: black;
+  color: yellow;
+}
+#naslov_index{
+  float:left;
+  margin-left: 15px;
+  font-family: "Cambria Math";
+  color: rgb(127, 59, 59);
+  position: relative;
+  top: 5px;
+}
+#meni_index{
+  margin-top: 0px;
+width: 100%;
+display: block;
+}
+#navbarNavDropdown > ul > li:hover{
+  background-color: rgb(15, 255, 28);
+  border-radius: 10px;
+}
+#navbarNavDropdown > ul > li > a >i{
+position: relative;
+left: 6px;
+}
+#navbarNavDropdown > ul > li > a{
+  color:rgba(255,19,13);
+}
+#rezervna_navigacija{
+  background-color: rgb(0,0,0,0.7);
+	z-index: 1;
+}
+#navbarNavDropdown1 > ul > li > a{
+	color: white;
+
+}
+#dugme_pocetna{
+  font-family: "Cambria Math";
+}
+#dugme_logovanje{
+   font-family: "Cambria Math";
+}
+#dugme_registracija{
+  color:rgb(32,255,13);
+  cursor: pointer;
+  position: relative;
+  left: 37%;
+}
+#dugme_demo{
+  font-family: "Cambria Math";
+}
+#dugme_cena{
+  font-family: "Cambria Math";
+}
+#dugme_kontakt{
+  font-family: "Cambria Math";
+}
+#jezici{
+  float: right;
+  margin-right: 15px;
+  position: relative;
+  top: -24px;
+}
+#engleski{
+  font-size: 16px;
+  font-family: "MV Boli";
+  color:rgba(255,19,13);
+  text-decoration: none;
+  padding: 2px 4px 2px 2px;
+  border-radius: 10px;
+  position: relative;
+  top: 30px;
+  z-index: 1;
+}
+#srpski{
+  font-size: 16px;
+  font-family: "MV Boli";
+  color:rgba(255,19,13);
+  text-decoration: none;
+  padding: 2px 4px 2px 2px;
+  border-radius: 10px;
+  position: relative;
+  top: 30px;
+  z-index: 1;
+}
+#header{
+  width:100%;
+  height: 55px;
+  margin-bottom: 0px;
+}
+#ceo_div_zaboravljena_lozinka{
+  display: none;
+  margin-top: 100px;
+}
+#forma_zaboravljena_lozinka{
+  margin:auto;
+  background-color: rgb(232, 166, 58);
+  box-shadow: 10px 10px 5px;
+  border-radius: 5px;
+}
+#label_email_zaboravljena_lozinka{
+  color:rgb(32,255,13);
+}
+#label_PIB_zaboravljena_zaboravljena_lozinka{
+  color:rgb(32,255,13);
+}
+#dugme_za_povratak_na_vrh{
+  background-color: red;
+  padding: 5px;
+  border-radius: 20px;
+  display: none;
+  border:1px solid black;
+	position:fixed;
+	bottom:20px;
+	left:20px;
+	z-index: 10;
+}
+#dugme_za_slanje_poruke_podrsci{
+  background-color: red;
+  padding: 9px;
+  border-radius: 20px;
+  border:1px solid black;
+  width: 43px;
+  margin-top: 3px;
+	position:fixed;
+	bottom:20px;
+	right:20px;
+	z-index: 10;
+}
+
+#poruka_adminu{
+  height:410px;
+  width: 220px;
+  border-radius: 20px;
+  background-color:orange;
+  border: 1px solid black;
+  display: none;
+  z-index: 10;
+  position:fixed;
+	   bottom:80px;
+	   right:20px;
+}
+#naslov_korisnika_koji_mi_salje_poruke{
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+#email_korisnika_koji_mi_salje_poruke{
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 5px;
+}
+#poruka_korisnika_koji_mi_salje_poruke{
+  width: 90%;
+  height: 200px;
+  max-height: 200px;
+  display: table;
+  margin:0 auto;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+#dugme_posalji_korisnika_koji_mi_salje_poruke{
+  float: right;
+  margin-right: 5%;
+  margin-top: 15px;
+  border-radius: 20px;
+}
+#slikica_o_slanju_emaila_od_korisnika{
+  float: left;
+  margin-left: 5%;
+  margin-top: 15px;
+  display: none;
+}
+#text_dodaj_uplatnicu{
+  margin-left: 5%;
+  width: 90%;
+}
+
+/* VREME CSS */
+
+#vreme{
+   float:right;
+   height:300px;
+   width:180px;
+}
+#trenutna{
+  width:100%;
+  height:170px;
+  background-color: lightgray;
+  text-align: center;
+  font-size: 75px;
+  background-size:cover;
+  color: red;
+}
+#opis{
+  width: 100%;
+  height: 30px;
+  background-color: lightgray;
+  text-align: center;
+}
+#ime_grada{
+  width:100%;
+  height:50px;
+  background-color: lightgray;
+  text-align: center;
+  font-size: 30px;
+}
+
+/* VREME CSS */
+
+/* REGISTRACIJA CSS */
+
+#okvir{
+  border-radius: 5px;
+  padding: 0px;
+  height: 510px;;
+  width: 500px;
+  display:none;
+  background-color: rgb(232, 166, 58);
+  box-shadow: 10px 10px 5px;
+}
+#strelice{
+  height:80px;
+  width:100%;
+  border-bottom: 2px solid lightgray;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  /* background-color: lightgray; */
+}
+#strelica1{
+  height: 100%;
+  width:25%;
+  background-color: rgb(28,215,13);
+  float: left;
+  border-radius: 50px;
+  text-align: center;
+  font-family: "Cambria Math";
+}
+#strelica2{
+  height: 100%;
+  width:25%;
+  background-color: lightgray;
+  float: left;
+  border-radius: 50px;
+  text-align: center;
+  font-family: "Cambria Math";
+  padding-top: 15px;
+}
+#strelica3{
+  height: 100%;
+  width:25%;
+  background-color: lightgray;
+  float: left;
+  border-radius: 50px;
+  text-align: center;
+  font-family: "Cambria Math";
+  padding-top: 15px;
+}
+#strelica4{
+  height: 100%;
+  width:25%;
+  background-color: lightgray;
+  float: left;
+  border-radius: 50px;
+  text-align: center;
+  font-family: "Cambria Math";
+  padding-top: 15px;
+}
+#naslovh5{
+  color: black;
+  font-family: "Cambria Math";
+}
+#sadrzaj{
+  width: 100%;
+  height: 100%;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+#dugmici{
+  margin-top: 10px;
+  float:right;
+}
+#div_uslovi_koriscenja{
+float: left;
+display: none;
+}
+
+#zatvori{
+float: right;
+
+}
+#korak-0{
+display: block;
+}
+#korak-1{
+display: none;
+}
+#korak-2{
+display: none;
+}
+#korak-3{
+display: none;
+}
+#sacuvaj{
+display:none;
+float:right;
+margin-left: 8px;
+}
+#nazad{
+
+}
+#napred{
+
+}
+#cancel{
+margin-top: 10px;
+}
+#crta{
+  clear: both;
+}
+#naslov{
+  width:100%;
+  height:60px;
+  border-bottom:2px solid lightgray;
+  /* text-align: center; */
+  padding-top: 3%;
+  padding-left: 2%;
+}
+
+.label_inputa_registracija{
+  font-weight: 700;
+  font-family: "Cambria Math";
+}
+
+
+/* REGISTRACIJA CSS */
+
+
+/* Footer */
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#footer {
+    background: #007b5e !important;
+}
+#footer h5{
+	padding-left: 10px;
+    border-left: 3px solid #eeeeee;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color:#ffffff;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#footer ul.social li{
+	padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+#footer ul.social li a,
+#footer ul.quick-links li a{
+	color:#ffffff;
+}
+#footer ul.social li a:hover{
+	color:#eeeeee;
+}
+#footer ul.quick-links li{
+	padding: 3px 0;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+@media (max-width:767px){
+	#footer h5 {
+    padding-left: 0;
+    border-left: transparent;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+   }
+}
+
+/* Footer */
