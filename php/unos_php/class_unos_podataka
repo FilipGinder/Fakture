@@ -1,0 +1,427 @@
+<?php
+session_start();
+
+class class_unos_podataka
+{
+  function brisanje_ponistavanje_tabele_pre_cuvanja()
+  {
+                  include ('../../konekcija.php');
+
+                  $id_fakture = mysqli_real_escape_string($konekcija,$_POST['id_fakture']);
+
+                  $upit = "DELETE FROM artikli_fakture WHERE id_vlasnika_fakture = '$id_fakture'";
+                  $rezultat = $konekcija->prepare($upit);
+                  $rezultat->execute();
+                  $konekcija->close();
+                  exit();
+  }
+
+  function prikaz_broja_i_statusa_za_broj_fakture()
+  {
+                  include ('../../konekcija.php');
+                  $id = $_SESSION['id'];
+                  $upit = "SELECT DISTINCT redni_broj_fakture,trenutna_godina FROM fakture WHERE id_korisnika = $id";
+                  $rezultat = $konekcija->prepare($upit);
+                  $rezultat->execute();
+                  $rezultat->bind_result($redni_broj_fakture,$trenutna_godina);
+
+                  $rezultat_niz = array();
+
+                        while ($rezultat->fetch())
+                        {
+                         $rezultat_niz[]=array($redni_broj_fakture,$trenutna_godina);
+                        }
+                        $konekcija->close();
+                    exit(json_encode($rezultat_niz));
+  }
+
+  function prikaz_sacuvanih_korisnikovih_artikala()
+  {
+                include ('../../konekcija.php');
+                $id = $_SESSION['id'];
+                $upit = "SELECT DISTINCT licni_artikli FROM podaci_o_artiklima WHERE id_korisnika = $id";
+                $rezultat = $konekcija->prepare($upit);
+                $rezultat->execute();
+                $rezultat->bind_result($podaci_o_artiklima);
+
+                $rezultat_niz = array();
+
+                      while ($rezultat->fetch())
+                      {
+                       $rezultat_niz[]=array($podaci_o_artiklima);
+                      }
+                      $konekcija->close();
+                  exit(json_encode($rezultat_niz));
+  }
+
+  function unos_broja_fakture_i_godine_u_bazu()
+  {
+                include ('../../konekcija.php');
+
+                $redni_broj_fakture = mysqli_real_escape_string($konekcija,$_POST['redni_broj_fakture']);
+                $danasnja_godina = mysqli_real_escape_string($konekcija,$_POST['danasnja_godina']);
+                $id = mysqli_real_escape_string($konekcija,$_POST['novi_id']);
+
+
+
+                $upit = "UPDATE fakture SET redni_broj_fakture = '$redni_broj_fakture',trenutna_godina = '$danasnja_godina' WHERE id_fakture = '$id'";
+                $rezultat = $konekcija->prepare($upit);
+                $rezultat->execute();
+                $konekcija->close();
+                exit(json_encode("Uspesno unet broj i godina fakture"));
+  }
+
+  function unos_osnovnih_podataka_klijenata()
+  {
+                      include ('../../konekcija.php');
+                      if(isset($_POST['dugme_osnovni_podaci'])){
+                      $id = $_SESSION['id'];
+
+                      $ime_primaoca = mysqli_real_escape_string($konekcija,$_POST['ime_primaoca']);
+                      $ime_primaoca = htmlspecialchars($ime_primaoca); //eleminise specijalne karaktere da ne bih mogla komanda neka da se unese
+                      $partnerov_PIB = mysqli_real_escape_string($konekcija,$_POST['partnerov_PIB']);
+                      $datum = mysqli_real_escape_string($konekcija,$_POST['datum']);
+                      $lokacija = mysqli_real_escape_string($konekcija,$_POST['lokacija']);
+                      $lokacija = htmlspecialchars($lokacija);
+                      $email_klijenta = mysqli_real_escape_string($konekcija,$_POST['email_klijenta']);
+                      $email_klijenta = htmlspecialchars($email_klijenta);
+                      $valuta = mysqli_real_escape_string($konekcija,$_POST['valuta']);
+                      $valuta = htmlspecialchars($valuta);
+
+                      if($ime_primaoca == null || $datum == null || $lokacija == null)
+                      {
+                        exit(json_encode("Popunite osnovne podatke"));
+                      }
+                      else if($email_klijenta  == "" && $partnerov_PIB  == ""){  //ovim dopustamo da se unesu podaci u bazu i ako je pib ne definisan/prazan
+                                            include ('../../konekcija.php');
+                                            $upit="INSERT INTO fakture(id_korisnika,ime_na_koga_je_faktura,partnerov_pib,datum_pravljenja_fakture,lokacija_partnerske_firme,email_klijenta,vrednost_fakture,status_fakture,redni_broj_fakture,trenutna_godina,valuta_fakture) VALUES('$id','$ime_primaoca','$partnerov_PIB','$datum','$lokacija','$email_klijenta','','','','','$valuta')";
+                                            $rezultat = $konekcija->prepare($upit);
+                                            $rezultat->execute();     //ubacujemo nove podatke u bazu
+
+
+                                            $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija); //i ovim odmah vracamo ID tog novog reda u bazi
+                                            $konekcija->close();
+                                            exit(json_encode($IDtog_novog_reda_u_bazi));
+
+                      }
+
+
+                      else if($partnerov_PIB  == "" && $email_klijenta  !== ""){  //ovim dopustamo da se unesu podaci u bazu i ako je pib ne definisan/prazan
+
+                              if(!filter_var($email_klijenta, FILTER_VALIDATE_EMAIL))
+                                {
+                                         exit(json_encode("Nepravilno unet email"));
+                                }
+                                else{
+                                            include ('../../konekcija.php');
+                                            $upit="INSERT INTO fakture(id_korisnika,ime_na_koga_je_faktura,partnerov_pib,datum_pravljenja_fakture,lokacija_partnerske_firme,email_klijenta,vrednost_fakture,status_fakture,redni_broj_fakture,trenutna_godina,valuta_fakture) VALUES('$id','$ime_primaoca','$partnerov_PIB','$datum','$lokacija','$email_klijenta','','','','','$valuta')";
+                                            $rezultat = $konekcija->prepare($upit);
+                                            $rezultat->execute();     //ubacujemo nove podatke u bazu
+
+
+                                            $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija); //i ovim odmah vracamo ID tog novog reda u bazi
+                                            $konekcija->close();
+                                            exit(json_encode($IDtog_novog_reda_u_bazi));
+                                     }
+                      }
+
+                      else if($email_klijenta  == "" && $partnerov_PIB  !== ""){  //ovim dopustamo da se unesu podaci u bazu i ako je pib ne definisan/prazan
+
+                              if(strcspn($partnerov_PIB, '0123456789') == strlen($partnerov_PIB) || strlen($partnerov_PIB)  > 9 || strlen($partnerov_PIB)  < 9)
+                                {
+                                  exit(json_encode("Nije broj"));    //a ovim da li je broj i da li je njegova duzina veca ili manja od 9 ako nije onda greska
+                                }
+                                else{
+                                            include ('../../konekcija.php');
+                                            $upit="INSERT INTO fakture(id_korisnika,ime_na_koga_je_faktura,partnerov_pib,datum_pravljenja_fakture,lokacija_partnerske_firme,email_klijenta,vrednost_fakture,status_fakture,redni_broj_fakture,trenutna_godina,valuta_fakture) VALUES('$id','$ime_primaoca','$partnerov_PIB','$datum','$lokacija','$email_klijenta','','','','','$valuta')";
+                                            $rezultat = $konekcija->prepare($upit);
+                                            $rezultat->execute();     //ubacujemo nove podatke u bazu
+
+
+                                            $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija); //i ovim odmah vracamo ID tog novog reda u bazi
+                                            $konekcija->close();
+                                            exit(json_encode($IDtog_novog_reda_u_bazi));
+                                     }
+                      }
+
+
+
+
+                       else if ($partnerov_PIB  !== "" && $email_klijenta  !== ""){  //ovim proveravamo ako je definisan pib
+                              if(strcspn($partnerov_PIB, '0123456789') == strlen($partnerov_PIB) || strlen($partnerov_PIB)  > 9 || strlen($partnerov_PIB)  < 9)
+                                {
+                                  exit(json_encode("Nije broj"));    //a ovim da li je broj i da li je njegova duzina veca ili manja od 9 ako nije onda greska
+                                }
+                               else if(!filter_var($email_klijenta, FILTER_VALIDATE_EMAIL))
+                                  {
+                                           exit(json_encode("Nepravilno unet email"));
+                                  }
+                               else{
+                                 include ('../../konekcija.php');
+                                 $upit="INSERT INTO fakture(id_korisnika,ime_na_koga_je_faktura,partnerov_pib,datum_pravljenja_fakture,lokacija_partnerske_firme,email_klijenta,vrednost_fakture,status_fakture,redni_broj_fakture,trenutna_godina,valuta_fakture) VALUES('$id','$ime_primaoca','$partnerov_PIB','$datum','$lokacija','$email_klijenta','','','','','$valuta')";
+                                 $rezultat = $konekcija->prepare($upit);
+                                 $rezultat->execute();                     //ako je u redu onda unosimo u bazu pod ovim uslovima
+
+
+                                 $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija);
+                                 $konekcija->close();
+                                 exit(json_encode($IDtog_novog_reda_u_bazi));
+                                   }
+                       };
+
+
+
+                      };
+
+  }
+
+  function prikaz_imena_za_select()
+  {
+                                include ('../../konekcija.php');
+                                $id = $_SESSION['id'];
+                                $upit = "SELECT DISTINCT ime_na_koga_je_faktura FROM fakture WHERE id_korisnika = $id";
+                                $rezultat = $konekcija->prepare($upit);
+                                $rezultat->execute();
+                                $rezultat->bind_result($ime_na_koga_je_faktura);
+
+                                $rezultat_niz = array();
+
+                                      while ($rezultat->fetch())
+                                      {
+                                       $rezultat_niz[]=array($ime_na_koga_je_faktura);
+                                      }
+                                      $konekcija->close();
+                                  exit(json_encode($rezultat_niz));
+  }
+
+  function racunanje()
+  {
+    //na ovoj stranici imamo dve varijante unosa sa definisanim rabato i sa ne definisanim rabatom i u jednoj i u drugoj varijanti imamo po jos dve pod varijante
+    //ako treba da se sacuva polje naziv artikla u bazi i druga je ako ne treba
+    include ('../../konekcija.php');
+    if(isset($_POST['plus'])){
+
+    $id_fakture = mysqli_real_escape_string($konekcija,$_POST['novi_id']);
+
+    $redni_broj = mysqli_real_escape_string($konekcija,$_POST['redni_broj']);
+
+    $naziv_artikla = mysqli_real_escape_string($konekcija,$_POST['naziv_artikla']);
+    $naziv_artikla = htmlspecialchars($naziv_artikla);
+
+    $jedinica_mere = mysqli_real_escape_string($konekcija,$_POST['jedinica_mere']);
+    $jedinica_mere = htmlspecialchars($jedinica_mere);
+
+    $kolicina = mysqli_real_escape_string($konekcija,$_POST['kolicina']);
+    $kolicina = htmlspecialchars($kolicina);
+
+    $cena_bez_pdv = mysqli_real_escape_string($konekcija,$_POST['cena_bez_pdv']);
+    $cena_bez_pdv = htmlspecialchars($cena_bez_pdv);
+
+    $rabat = mysqli_real_escape_string($konekcija,$_POST['rabat']);
+    $rabat = htmlspecialchars($rabat);
+
+    $pdv = mysqli_real_escape_string($konekcija,$_POST['pdv']);
+
+    $id = $_SESSION['id'];
+
+    if($rabat == "" || $rabat == null){      //OPCIJA AKO RABAT NIJE DEFINISAN
+                  $rabat = 0;
+                  $iznos_pdv = $kolicina * ($cena_bez_pdv - (($rabat/100)*$cena_bez_pdv));  //VREDNOST KAD SE ODBIJE RABAT
+                  $iznos_pdv = ($iznos_pdv / 100) * $pdv;                                   //RACUNANJE UKUPNOG PDV-a NA OSNOVU RABATA
+          //        $iznos_pdv = round($iznos_pdv, 2); //DEFINISE DA SAMO DVE DECIMALE BUDU IZA BROJA
+
+                  $ukupan_rabat = $kolicina * ($rabat/100)*$cena_bez_pdv; //UKUPAN RABAT
+
+                  $cena_puta_kolicina = $kolicina * $cena_bez_pdv; //OSNOVNA CENA PUTA KOLICINA
+
+                  $vrednost_sa_pdv = $kolicina * ($cena_bez_pdv - (($rabat/100)*$cena_bez_pdv)) + $iznos_pdv;    //RACUNANJE UKUPNE CENE SA RABATOM I PDV ZARACUNATIM
+          //        $vrednost_sa_pdv = round($vrednost_sa_pdv, 2);  //DEFINISE DA SAMO DVE DECIMALE BUDU IZA BROJA
+
+                  if($naziv_artikla == null || $jedinica_mere == null || $kolicina == null || $cena_bez_pdv == null)
+                  {
+                    exit(json_encode("Ne potpun red "));
+                  }
+                  else{
+
+
+                            $upit = "SELECT licni_artikli FROM podaci_o_artiklima WHERE id_korisnika = $id";
+                            $rezultat = $konekcija->prepare($upit);
+                            $rezultat->execute();
+                            $rezultat->bind_result($licni_artikli);     //PRVO UZIMAMO PODATKE IZ TABELE....PODACI O KUPCIMA....
+
+                            $rezultat_niz = array();
+
+                                  while ($rezultat->fetch())
+                                  {
+                                   $rezultat_niz[]=array($licni_artikli);      //TO PAKUJEMO U NIZ
+                                  }
+
+
+                          function value_exists($rezultat_niz, $naziv_artikla) {        //ZATIM PRAVIMO FUNKCIJU SA DVA PARAMETRA DOBIJENI NIZ I NOVI UNETI ARTIKAL
+                              foreach($rezultat_niz as $value) {                       //PROLAZIMO KROZ NIZ I U $VALUE PAKUJEMO MALE NIZOVE KOJI SU BILI UNUTAR VELIKOG NIZA
+                                  if(is_array($value)) {
+                                      if(true === value_exists($value, $naziv_artikla)) { //OVIM PROVERAVAMO DA LI SE U TIM MALIM NIZICIMA NALAZI OVAJ NOVI NAZIV
+                                          return true;                  //VARACAMO TRUE AKO SE NALAZI
+                                      }
+                                  }
+                                  else if($value == $naziv_artikla) {           //OVO JE DRUGA PROVERA DA LI SE NALAZI OVAJ NAZIV U NIZICIMA
+                                      return true;
+                                  }
+                              }
+
+                              return false;   //AKO SE NE NALAZE FUNKCIJA VRACA FALSE
+                          }
+
+                          if(value_exists($rezultat_niz, $naziv_artikla))  //OVO RADI SLICNO KO I IN_ARRAY...OVO JE OPCIJA AKO SE NALAZI
+                           {                                               //ONDA PRESKACE UNOS U PODACI_ARTIKALA VEC SAMO UNOSI RED CEO U ARTIKLI_FAKTURE
+                                     include ('../../konekcija.php');
+                                     $upit1="INSERT INTO artikli_fakture(id_vlasnika_fakture,redni_broj,naziv_artikla,jedinica_mere,kolicina,cena_bez_pdv,cena_puta_kolicina,rabat,ukupan_rabat,pdv,iznos_pdv,ukupna_vrednost)
+                                     VALUES ('$id_fakture','$redni_broj','$naziv_artikla','$jedinica_mere','$kolicina','$cena_bez_pdv','$cena_puta_kolicina','$rabat','$ukupan_rabat','$pdv','$iznos_pdv','$vrednost_sa_pdv')";
+                                     $rezultat1 = $konekcija->prepare($upit1);
+                                     $rezultat1->execute();
+
+                                    $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija); //i ovim odmah vracamo ID tog novog reda u bazi
+                                    $konekcija->close();
+                                    $niz = array("$iznos_pdv","$vrednost_sa_pdv","$rabat","$IDtog_novog_reda_u_bazi");
+                                    exit(json_encode($niz));
+                          }
+                          else { //OVO JE OPCIJA AKA SE NE NALAZI NOVI ARTIKAL U NIZU ONDA PRVO NJEGA UNOSI PA ZATIM CEO RED
+                        //      OVE SVE ISTO PONAVLJAMO I U VARIJANTI AKO JE DEFINISAN RABAT
+                                     $upit="INSERT INTO podaci_o_artiklima(id_korisnika,licni_artikli) VALUES ('$id','$naziv_artikla')";
+                                     $rezultat = $konekcija->prepare($upit);
+                                     $rezultat->execute();
+                                     $konekcija->close();
+
+
+                                     include ('../../konekcija.php');
+                                     $upit1="INSERT INTO artikli_fakture(id_vlasnika_fakture,redni_broj,naziv_artikla,jedinica_mere,kolicina,cena_bez_pdv,cena_puta_kolicina,rabat,ukupan_rabat,pdv,iznos_pdv,ukupna_vrednost)
+                                     VALUES ('$id_fakture','$redni_broj','$naziv_artikla','$jedinica_mere','$kolicina','$cena_bez_pdv','$cena_puta_kolicina','$rabat','$ukupan_rabat','$pdv','$iznos_pdv','$vrednost_sa_pdv')";
+                                     $rezultat1 = $konekcija->prepare($upit1);
+                                     $rezultat1->execute();
+
+                                    $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija); //i ovim odmah vracamo ID tog novog reda u bazi
+                                    $konekcija->close();
+                                    $niz = array("$iznos_pdv","$vrednost_sa_pdv","$rabat","$IDtog_novog_reda_u_bazi");
+                                    exit(json_encode($niz));
+                                }
+                  };
+    }
+
+
+
+    else if($rabat != "" || $rabat != null){     //OPCIJA AKO JE RABAT DEFINISANN
+                    $iznos_pdv = $kolicina * ($cena_bez_pdv - (($rabat/100)*$cena_bez_pdv));  //VREDNOST KAD SE ODBIJE RABAT
+                    $iznos_pdv = ($iznos_pdv / 100) * $pdv;                                   //RACUNANJE UKUPNOG PDV-a NA OSNOVU RABATA
+        //            $iznos_pdv = round($iznos_pdv, 2); //DEFINISE DA SAMO DVE DECIMALE BUDU IZA BROJA
+
+                    $ukupan_rabat = $kolicina * ($rabat/100)*$cena_bez_pdv; //UKUPAN RABAT
+
+                    $cena_puta_kolicina = $kolicina * $cena_bez_pdv; //OSNOVNA CENA PUTA KOLICINA
+
+                    $vrednost_sa_pdv = $kolicina * ($cena_bez_pdv - (($rabat/100)*$cena_bez_pdv)) + $iznos_pdv;    //RACUNANJE UKUPNE CENE SA RABATOM I PDV ZARACUNATIM
+        //            $vrednost_sa_pdv = round($vrednost_sa_pdv, 2);  //DEFINISE DA SAMO DVE DECIMALE BUDU IZA BROJA
+
+                    if($naziv_artikla == null || $jedinica_mere == null || $kolicina == null || $cena_bez_pdv == null)
+                    {
+                      exit(json_encode("Ne potpun red "));
+                    }
+                    else{
+
+
+                      $upit = "SELECT licni_artikli FROM podaci_o_artiklima WHERE id_korisnika = $id";
+                      $rezultat = $konekcija->prepare($upit);
+                      $rezultat->execute();
+                      $rezultat->bind_result($licni_artikli);     //PRVO UZIMAMO PODATKE IZ TABELE....PODACI O KUPCIMA....
+
+                      $rezultat_niz = array();
+
+                            while ($rezultat->fetch())
+                            {
+                             $rezultat_niz[]=array($licni_artikli);      //TO PAKUJEMO U NIZ
+                            }
+
+
+                      function value_exists($rezultat_niz, $naziv_artikla) {        //ZATIM PRAVIMO FUNKCIJU SA DVA PARAMETRA DOBIJENI NIZ I NOVI UNETI ARTIKAL
+                          foreach($rezultat_niz as $value) {                       //PROLAZIMO KROZ NIZ I U $VALUE PAKUJEMO MALE NIZOVE KOJI SU BILI UNUTAR VELIKOG NIZA
+                              if(is_array($value)) {
+                                  if(true === value_exists($value, $naziv_artikla)) { //OVIM PROVERAVAMO DA LI SE U TIM MALIM NIZICIMA NALAZI OVAJ NOVI NAZIV
+                                      return true;                  //VARACAMO TRUE AKO SE NALAZI
+                                  }
+                              }
+                              else if($value == $naziv_artikla) {           //OVO JE DRUGA PROVERA DA LI SE NALAZI OVAJ NAZIV U NIZICIMA
+                                  return true;
+                              }
+                          }
+
+                          return false;   //AKO SE NE NALAZE FUNKCIJA VRACA FALSE
+                      }
+
+
+
+                      if(value_exists($rezultat_niz, $naziv_artikla))  //OVO RADI SLICNO KO I IN_ARRAY...OVO JE OPCIJA AKO SE NALAZI
+                       {                                               //ONDA PRESKACE UNOS U PODACI_ARTIKALA VEC SAMO UNOSI RED CEO U ARTIKLI_FAKTURE
+
+                         include ('../../konekcija.php');
+                         $upit1="INSERT INTO artikli_fakture(id_vlasnika_fakture,redni_broj,naziv_artikla,jedinica_mere,kolicina,cena_bez_pdv,cena_puta_kolicina,rabat,ukupan_rabat,pdv,iznos_pdv,ukupna_vrednost)
+                         VALUES ('$id_fakture','$redni_broj','$naziv_artikla','$jedinica_mere','$kolicina','$cena_bez_pdv','$cena_puta_kolicina','$rabat','$ukupan_rabat','$pdv','$iznos_pdv','$vrednost_sa_pdv')";
+                         $rezultat1 = $konekcija->prepare($upit1);
+                         $rezultat1->execute();
+
+                        $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija); //i ovim odmah vracamo ID tog novog reda u bazi
+                        $konekcija->close();
+                        $niz = array("$iznos_pdv","$vrednost_sa_pdv","$rabat","$IDtog_novog_reda_u_bazi");
+                        exit(json_encode($niz));
+                       }
+
+
+
+
+                       else { //OVO JE OPCIJA AKA SE NE NALAZI NOVI ARTIKAL U NIZU ONDA PRVO NJEGA UNOSI PA ZATIM CEO RED
+                     //      OVE SVE ISTO PONAVLJAMO I U VARIJANTI AKO JE DEFINISAN RABAT
+                      include ('../../konekcija.php');
+                      $upit="INSERT INTO podaci_o_artiklima(id_korisnika,licni_artikli) VALUES ('$id','$naziv_artikla')";
+                      $rezultat = $konekcija->prepare($upit);
+                      $rezultat->execute();
+                      $konekcija->close();
+
+
+
+                     include ('../../konekcija.php');
+                     $upit1="INSERT INTO artikli_fakture(id_vlasnika_fakture,redni_broj,naziv_artikla,jedinica_mere,kolicina,cena_bez_pdv,cena_puta_kolicina,rabat,ukupan_rabat,pdv,iznos_pdv,ukupna_vrednost)
+                     VALUES ('$id_fakture','$redni_broj','$naziv_artikla','$jedinica_mere','$kolicina','$cena_bez_pdv','$cena_puta_kolicina','$rabat','$ukupan_rabat','$pdv','$iznos_pdv','$vrednost_sa_pdv')";
+                     $rezultat1 = $konekcija->prepare($upit1);
+                     $rezultat1->execute();
+
+                    $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija); //i ovim odmah vracamo ID tog novog reda u bazi
+                    $konekcija->close();
+                    $niz = array("$iznos_pdv","$vrednost_sa_pdv","$rabat","$IDtog_novog_reda_u_bazi");
+                    exit(json_encode($niz));
+                  };
+                    };
+               }
+    };
+  }
+
+  function select_popuna_podataka()
+  {
+                    include ('../../konekcija.php');
+
+                    $ime = mysqli_real_escape_string($konekcija,$_POST['ime']);
+
+                    $upit = "SELECT DISTINCT ime_na_koga_je_faktura,partnerov_pib,lokacija_partnerske_firme,email_klijenta FROM fakture WHERE ime_na_koga_je_faktura LIKE '$ime'";
+                    $rezultat = $konekcija->prepare($upit);
+                    $rezultat->execute();
+
+                    $rezultat->bind_result($ime_vlasnika,$partnerov_pib,$lokacija_partnerske_firme,$email_klijenta);
+
+                    $rezultat_niz = array();
+
+                          while ($rezultat->fetch())
+                          {
+                           $rezultat_niz[]=array($ime_vlasnika,$partnerov_pib,$lokacija_partnerske_firme,$email_klijenta);
+                         };
+                    $konekcija->close();
+                         exit(json_encode($rezultat_niz));
+  }
+}
+ ?>
