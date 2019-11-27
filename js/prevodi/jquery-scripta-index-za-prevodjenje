@@ -1,0 +1,543 @@
+// ODABIROM NA SELECT BIRAMO JEZIK KOJI ZELIM I AUTOMACKI MENJAMO JEZIK NA CELOJ STRANICI...A KLIKOM NA DUGME "PRIJAVITE SE ILI FINISH(na kraju registracije)" UZIMAMO VREDNOST SELECTA I  SALJEMO JE U PHP ZA PROVERU
+// JEZIKA. TU STRANICU AUTOMACKI SA DOCUMENTOM UCITAVAMO NA SVIM STRANICAMA I NA OSNOVU TE VREDNOSTI UZ POMOC JQUERY-a MENJAMO JEZIK SVIM ELEMENTIMA NA TOJ STRANICI
+$(document).ready(function (){
+  jezik = window.location.search.substring(7);  //OVO U SLUCAJU KAD SE VRACAMO NA INDEX STRANICU VRACAMO I INFORMACIJU O TRENUTNOM JEZIKU
+
+  if(jezik == 'srpski' || jezik == null)   //   AKO JE SRPSKI ONDA PRIKAZUJE SRPSKU VERZIJU OVO NULL SLUZI PRI PRVOM UCITAVANJU SAJTA KAD JEZIK JOS NIJE IZABRAN DA ODMAH PRIKAZE SRPSKI
+  {
+    $("#naslov_index").html("Trikorijum Fakturisanje");
+    $("#dugme_pocetna").html("Pocetna");
+    $("#dugme_o_nama").html("O nama");
+    $("#dugme_logovanje").html("Prijavi se");
+    $("#dugme_cena").html("Cena");
+    $("#dugme_video_uputstva").html("Video uputstva");
+    $("#dugme_kontakt").html("Kontakt");
+
+    $("#text_o_registraciji").html("Jos uvek nemate nalog na Trikorijum Fakturisanje?");
+    $("#dugme_registracija").html("REGISTRUJTE SE");
+
+    $("#dugme_pocetna_pomocno").html("Pocetna");
+    $("#dugme_o_nama_pomocno").html("O nama");
+    $("#dugme_logovanje_pomocno").html("Prijavi se");
+    $("#dugme_cena_pomocno").html("Cena");
+    $("#dugme_video_uputstva_pomocno").html("Video uputstva");
+    $("#dugme_kontakt_pomocno").html("Kontakt");
+
+
+    $("#naslov_korisnika_koji_mi_salje_poruke").html("Sve vase sugestije i pitanja mozete nam proslediti ovde");
+    $("#dugme_posalji_korisnika_koji_mi_salje_poruke").val("Posalji");
+    $("#email_korisnika_koji_mi_salje_poruke").attr("placeholder", "Vas e-mail");
+    $("#poruka_korisnika_koji_mi_salje_poruke").attr("placeholder", "Poruka");
+
+    $("#naslovh5").html("Unos podataka o korisniku i firmi");
+    $("#strelica1").html("Podaci o korisniku");
+    $("#strelica2").html("Podaci o firmi");
+    $("#strelica3").html("Podaci o firmi");
+    $("#strelica4").html("kontak firme");
+
+
+    $("#label_lozinka").html("Lozinka:");
+    $("#lozinka").attr("placeholder", "Lozinka");
+    $("#label_ime_vlasnika").html("Ime i prezime vlasnika:");
+    $("#ime_vlasnika").attr("placeholder", "Ime i prezime vlasnika koje ce se prikazivati na fakturi");
+
+    $("#label_ime_firme").html("Ime Firme:");
+    $("#ime_firme").attr("placeholder", "Ime Firme");
+    $("#label_adresa_firme").html("Adresa Firme:");
+    $("#adresa_firme").attr("placeholder", "Adresa Firme");
+    $("#label_lokacija_firme").html("Lokacija Firme:");
+    $("#lokacija_firme").attr("placeholder", "Lokacija Firme/Grad");
+
+    $("#label_pib_firme").html("Pib Firme:");
+    $("#pib_firme").attr("placeholder", "Pib Firme");
+    $("#label_maticni_br_firme").html("Maticni broj Firme:");
+    $("#maticni_br_firme").attr("placeholder", "Maticni broj Firme");
+    $("#label_opis_firme").html("Delatnost firme:");
+    $("#opis_firme").attr("placeholder", "Opis firme cime se bavi");
+
+    $("#label_ziro_racun").html("Ziro Racun:");
+    $("#ziro_racun").attr("placeholder", "Ziro Racun");
+    $("#label_broj_telefona").html("Broj telefona u formatu (xxx-xxx-xxxx)");
+    $("#label_fix_br_telefona").attr("placeholder", "Fix broj telefona:");
+    $("#modal_uslovi_koriscenja").html("Prihvatam uslove koriscenja");
+
+    $("#nazad").val("Predhodno");
+    $("#napred").val("Sledece");
+    $("#sacuvaj").val("Sacuvaj");
+    $("#cancel").val("Ponisti");
+    $("#zatvori").val("Zatvori");
+
+    $("#password").attr("placeholder", "Lozinka");
+    $("#posalji").html("Prijavite se");
+    $("#dugme_registruj_se").html("Registruj se");
+    $("#link_zaboravljena_lozinka").html("Zaboravljena lozinka");
+    $("#label_zapamti_me").html("Zapamti me");
+
+    //USLOVI KORISCENJA
+    $("#exampleModalScrollableTitle").html('Uslovi koriscenja');
+    $("#prvi_paragraf").html('Molimo pažljivo pročitajte našu politiku privatnosti kako biste jasno razumeli kako sakupljamo, koristimo, stitimo ili na neki drugi način rukujemo, Vašim ličnim podacima u skladu sa našim sajtom. Korišćenjem ovog sajta prihvatate i politiku privatnosti.');
+    $("#drugi_podnaslov").html('Koje lične podatke prikupljamo od ljudi koji posećuju ovaj sajt?');
+    $("#drugi_paragraf").html('Ime, Prezime, Email adresu, Ime firme, Adresu, PIB, Maticni br firme, Ziro racun, Broj mobilnog i fiksnog telefona  IP adresu korisnika. Ipak, sajt možete posetiti i anonimno.');
+    $("#treci_podnalov").html('Kada sakupljamo lične informacije?');
+    $("#treci_pagargaf").html('Mi prikupljamo podatke od Vas kada se pretplatite na koriscenje aplikacije, posaljete nam poruku uz pomoc naseg sajta ili posetite sajt.');
+    $("#cetvrti_podnaslov").html('Ukratko:');
+    $("#prvi_clan_prve_liste").html('Prilikom posete sajtu: IP adresu, kolačići');
+    $("#drugi_clan_prve_liste").html('Prilikom slanja Email poruke preko kontakt forme: Ime (uvek), Email (uvek)');
+    $("#treci_clan_prve_liste").html('Prilikom popunjavanja registracije forme: Ime (uvek), Prezime (uvek), Email (uvek), Ime firme (uvek), Adresu (uvek), PIB (uvek), Maticni broj firme (uvek), Ziro racun (uvek), Br.mobilnog (uvek)');
+    $("#peti_podnaslov").html('Kako koristimo Vaše podatke?');
+    $("#cetvrti_paragraf").html('Sve informacije koje sakupljamo od Vas mogu se koristiti na jedan od sledećih načina:');
+    $("#prvi_clan_druge_liste").html('Da personalizujmo Vaše iskustvo na sajtu (Vaše informacije nam pomažu da bolje odgovorimo na Vaše individualne potrebe)');
+    $("#drugi_clan_druge_liste").html('Da poboljšamo našu veb stranicu');
+    $("#treci_clan_trece_liste").html('Za zaštitu našeg sajta (Vaša IP adresa može biti blokirana ako pokušate da na bilo koji način nanesete bilo kakvu štetu sajtu)');
+    $("#peti_paragraf").html('Podatke koje ostavite na Trikorijum fakturisanje ce se iskljucivo koristiti za potrebe rada ovog sajta');
+    $("#sesti_paragraf").html('Trikorijum fakturisanje ne prosledjuje, ne prodaje, niti iznajmljuje vase podatke');
+    $("#sesti_podnaslov").html('Kako štitimo Vaše informacije?');
+    $("#sedmi_paragraf").html('Sve informacije, pogotovo one osetljive i lične, koje razmenjujete sa ovim sajtom štite se pomoću tehnologije Secure Socket Layer (SSL).');
+    $("#sedmi_podnaslov").html('Linkovi trećih strana');
+    $("#osmi_paragraf").html('Povremeno, po našem nahođenju, možemo da uključimo ili ponudimo proizvode i usluge nezavisnih proizvođača na našoj veb lokaciji. Ove treće strane imaju zasebne i nezavisne politike privatnosti. Stoga nemamo nikakvu odgovornost niti odgovornost za sadržaj i aktivnosti ovih povezanih sajtova. Mi želimo zaštititi integritet našeg sajta.');
+    $("#dugme_zatvori_modal_uslove_koriscenja").val('Zatvori');
+    $("#dugme_prihvatam_uslove_koriscenja").val('Prihvatam');
+    //USLOVI KORISCENJA
+
+
+
+    //O NAMA
+    $("#o_nama_naslov").html('O nama');
+    $("#text_o_nama_naslov").html('Brzo i lako moze svako');
+    $("#o_nama_1_paragraf").html('Na brz i lak nacin uz pomoc Trikorijum Fakturisanje programa mozete voditi svoje poslovanje iz udobnosti svog doma vrlo profesionalno.<br>Trikorijum je napredna i proaktivna aplikacija uz koju Brzo i lako moze svako da je koristi za usluge koje su vam potrebne.');
+    $("#o_nama_2_paragraf").html('Neka sve vase fakture budu na jednom mestu,Od sad dostupne svuda gde imate pristup internetu.');
+    $("#o_nama_3_paragraf").html('Generisite vas brend na fakturama, cuvajte, stornirajte, stampajte, NEKA VAM SVE VASE FAKTURE BUDU NA DOHVAT RUKE.');
+    $("#o_nama_4_paragraf").html('DEMO verzuju programa mozete isprobati <a id="dugme_demo" href="#">ovde.</a>');
+    $("#o_nama_5_paragraf").html('Nas cenovnik mozete pogledati <a href="#" id="ka_cenovniku_iz_texta">ovde.</a>');
+    $("#o_nama_6_paragraf").html('Trikorijum Fakturisanje pamti vase cesto unosene artikle prilikom izrade faktura i automatizovano vam prvo njih nudi pri svakom sledecem unosu artikala.');
+    $("#o_nama_7_paragraf").html('Brza pretraga svih faktura na jednom mestu u samo par koraka');
+    $("#o_nama_8_paragraf").html('Jednostavna izmena vasih podataka (koji se prikazuju na fakturama) ili podataka vasih klijenata u samoj aplikaciji.');
+    $("#o_nama_9_paragraf").html('Mogucnost slanja faktura na E-mail klijentima u par klika.');
+    $("#o_nama_10_paragraf").html('Pored same izrade Faktura, program nudi jos mnostvo opcija.');
+    //O NAMA
+
+    // DIV SA LISTOM
+    $("#tabela_naslov").html('Fakture');
+    $("#tabela_1_stavka").html('Cuvanje svih tvojih prethodnih unosa');
+    $("#tabela_2_stavka").html('Baza svih tvojih komintenta na jednom mestu');
+    $("#tabela_3_stavka").html('Lak pregled placenih i neplacenih faktura');
+    $("#tabela_4_stavka").html('Lak pregled faktura po godinama pravljenja');
+    $("#tabela_5_stavka").html('Fakture u RSD ili EUR - valuti');
+    $("#tabela_6_stavka").html('Jednostavno dodavanje vaseg brenda na fakturama');
+    $("#tabela_7_stavka").html('Odabir jednog od vise razlicitih dizajna faktura');
+    $("#tabela_8_stavka").html('Brzo stampanje faktura');
+    $("#tabela_9_stavka").html('Slanje faktura na e-mail komintentima u samo par klikova');
+    // DIV SA LISTOM
+
+    //DIV CENOVNIK
+    $("#cenovnik_naslov").html('Cenovnik');
+    $("#pasus_o_odabiru_paketa").html('Izaberite jedan od paketa koji vam najvise odgovara');
+    $("#naslov_osnovna_cena").html('OSNOVNI');
+    $("#naslov_standardna_cena").html('STANDARD');
+    $("#naslov_napredna_cena").html('NAPREDNI');
+    //DIV CENOVNIK
+  }
+  else if(jezik == 'engleski')   //AKO VRATIMO SE NA INDEX SA ENGLESKIM JEZIKOM ONDA PRIKAZUJEMO ENGLESKU VERZIJU
+  {
+    $("#naslov_index").html("Trikorijum Fakturisanje");
+    $("#dugme_pocetna").html("Home");
+    $("#dugme_o_nama").html("About us");
+    $("#dugme_logovanje").html("Log in");
+    $("#dugme_cena").html("Price");
+    $("#dugme_video_uputstva").html("Video instructions");
+    $("#dugme_kontakt").html("Contact");
+
+    $("#dugme_pocetna_pomocno").html("Home");
+    $("#dugme_o_nama_pomocno").html("About us");
+    $("#dugme_logovanje_pomocno").html("Log in");
+    $("#dugme_cena_pomocno").html("Price");
+    $("#dugme_video_uputstva_pomocno").html("Video instructions");
+    $("#dugme_kontakt_pomocno").html("Contact");
+
+    $("#text_o_registraciji").html("Do not have an account on Trikorijum Fakturisanje?");
+    $("#dugme_registracija").html("SIGN UP");
+    $("#naslov_korisnika_koji_mi_salje_poruke").html("All your suggestions and questions can be forwarded to us here");
+    $("#dugme_posalji_korisnika_koji_mi_salje_poruke").val("Send");
+    $("#email_korisnika_koji_mi_salje_poruke").attr("placeholder", "Your e-mail");
+    $("#poruka_korisnika_koji_mi_salje_poruke").attr("placeholder", "Message");
+
+    $("#naslovh5").html("Entering data about the user and company");
+    $("#strelica1").html("User data");
+    $("#strelica2").html("Company data");
+    $("#strelica3").html("Company data");
+    $("#strelica4").html("Contact company");
+
+
+    $("#label_lozinka").html("Password:");
+    $("#lozinka").attr("placeholder", "Password");
+    $("#label_ime_vlasnika").html("Name and surname of Owner:");
+    $("#ime_vlasnika").attr("placeholder", "Name and surname of the owner, which will be shown on the invoice");
+
+    $("#label_ime_firme").html("Company name:");
+    $("#ime_firme").attr("placeholder", "Company name");
+    $("#label_adresa_firme").html("Company address:");
+    $("#adresa_firme").attr("placeholder", "Company address");
+    $("#label_lokacija_firme").html("Companies location:");
+    $("#lokacija_firme").attr("placeholder", "Companies location/Citi");
+
+    $("#label_pib_firme").html("PIB companies:");
+    $("#pib_firme").attr("placeholder", "PIB companies");
+    $("#label_maticni_br_firme").html("Identification number of the company:");
+    $("#maticni_br_firme").attr("placeholder", "Identification number of the company");
+    $("#label_opis_firme").html("Activity company:");
+    $("#opis_firme").attr("placeholder", "Description of the company");
+
+    $("#label_ziro_racun").html("Bank account:");
+    $("#ziro_racun").attr("placeholder", "Bank account");
+    $("#label_broj_telefona").html("Phone number format (xxx-xxx-xxxx)");
+    $("#label_fix_br_telefona").html("Phone number landline:");
+    $("#modal_uslovi_koriscenja").html("I accept the terms of use");
+
+    $("#nazad").val("Previous");
+    $("#napred").val("Next");
+    $("#sacuvaj").val("Finish");
+    $("#cancel").val("Cancel");
+    $("#zatvori").val("Close");
+
+    $("#password").attr("placeholder", "Password");
+    $("#posalji").html("Login");
+    $("#dugme_registruj_se").html("Registration");
+    $("#link_zaboravljena_lozinka").html("Forgot password");
+    $("#label_zapamti_me").html("Remember me");
+
+
+    //USLOVI KORISCENJA
+    $("#exampleModalScrollableTitle").html('Conditions of Use');
+    $("#prvi_paragraf").html('Please read our privacy policy to clearly understand how we collect, use, protect or otherwise handle, your personal information in accordance with this site. By using this site you agree to the privacy policy.');
+    $("#drugi_podnaslov").html('What personal information do we collect from people who visit this site?');
+    $("#drugi_paragraf").html('Name, Last Name, Email address, company name, address, TIN, registration number of the company, Bank account number, mobile and fixed telephone IP address of the user. However, you can visit the site anonymously.');
+    $("#treci_podnalov").html('When we collect personal information?');
+    $("#treci_pagargaf").html('We collect information from you when you subscribe to use the application, send us a message with our site or visit the web site.');
+    $("#cetvrti_podnaslov").html('In short:');
+    $("#prvi_clan_prve_liste").html('When you visit the website: IP address, cookies');
+    $("#drugi_clan_prve_liste").html('When sending mail via the contact form: Name (always), Email (always)');
+    $("#treci_clan_prve_liste").html('When filling out the registration form: Name (always) Surname (always), Email (always) Name of company (always), addresses (always), TIN (always), company registration number (always) Bank account (always), Br.mob (always)');
+    $("#peti_podnaslov").html('How we use your information?');
+    $("#cetvrti_paragraf").html('All information we collect from you may be used in one of the following ways:');
+    $("#prvi_clan_druge_liste").html('Yes improve your experience on the site (your information helps us to better respond to your individual needs)');
+    $("#drugi_clan_druge_liste").html('To improve our website');
+    $("#treci_clan_trece_liste").html('For the protection of our site (your IP address can be blocked if you try in any way inflict any damage to the site)');
+    $("#peti_paragraf").html('The information you provide on Trikorijum invoicing will be used exclusively for the needs of this site');
+    $("#sesti_paragraf").html('Trikorijum fakturisanje is not forwarded, sell, or rent your information');
+    $("#sesti_podnaslov").html('How we protect your information?');
+    $("#sedmi_paragraf").html('All information, especially those sensitive and personal, that you exchange with this site are protected using Secure Socket Layer (SSL).');
+    $("#sedmi_podnaslov").html('Third party links');
+    $("#osmi_paragraf").html('Occasionally, at our discretion, we may include or offer products and services of independent producers on our website. These third parties have separate and independent privacy policies. Therefore, we do not have any responsibility or liability for the content and activities of these linked sites. We want to protect the integrity of our site.');
+    $("#dugme_zatvori_modal_uslove_koriscenja").val('Close');
+    $("#dugme_prihvatam_uslove_koriscenja").val('I accept');
+    //USLOVI KORISCENJA
+
+    //O NAMA
+    $("#o_nama_naslov").html('About us');
+    $("#text_o_nama_naslov").html('Everybody can quickly and easily');
+    $("#o_nama_1_paragraf").html('In a quick and easy way with the help of Tricorium Fakturisanje Program you can manage your business from the comfort of your home very professionally.<br>Tricorium is an advanced and proactive application with which Quickly and easily anyone can use it for the services you need.');
+    $("#o_nama_2_paragraf").html('Let all your invoices be in one place, From now available wherever you have Internet access.');
+    $("#o_nama_3_paragraf").html('Generate your brand on invoices, save, reverse, print, SOME OF YOUR FACTORS WILL BE INVOLVED IN THE DOOM OF HAND.');
+    $("#o_nama_4_paragraf").html('You can try the DEMO version of the program <a id="dugme_demo" href="#">here.</a>');
+    $("#o_nama_5_paragraf").html('You can see our price list <a href="#" id="ka_cenovniku_iz_texta">here.</a>');
+    $("#o_nama_6_paragraf").html('Tricorum Fakturisanje reminds you of often inbred items when creating invoices and automatically offers you first for each subsequent entry of the item.');
+    $("#o_nama_7_paragraf").html('Quick search of all invoices in one place in just a few steps');
+    $("#o_nama_8_paragraf").html('Easily change your data (shown on invoices) or your clients data in the application itself.');
+    $("#o_nama_9_paragraf").html('The ability to send invoices to E-mail clients in a pair of clicks.');
+    $("#o_nama_10_paragraf").html('In addition to the factoring itself, the program offers many more options.');
+    //O NAMA
+
+    // DIV SA LISTOM
+    $("#tabela_naslov").html('Invoices');
+    $("#tabela_1_stavka").html('Keep all of your previous entries');
+    $("#tabela_2_stavka").html('Base all your comments in one place');
+    $("#tabela_3_stavka").html('Easy overview of paid and unpaid invoices');
+    $("#tabela_4_stavka").html('Easy to view invoices by years of making');
+    $("#tabela_5_stavka").html('Invoices in RSD or EUR - currency');
+    $("#tabela_6_stavka").html('Easily add your brand to invoices');
+    $("#tabela_7_stavka").html('Choosing one of several different designs of invoices');
+    $("#tabela_8_stavka").html('Fast printing invoices');
+    $("#tabela_9_stavka").html('Send invoices to e-mail clients in just a few clicks');
+    // DIV SA LISTOM
+
+    //DIV CENOVNIK
+    $("#cenovnik_naslov").html('Pricelist');
+    $("#pasus_o_odabiru_paketa").html('Choose one of the packages that best suits you');
+    $("#naslov_osnovna_cena").html('BASIC');
+    $("#naslov_standardna_cena").html('STANDARD');
+    $("#naslov_napredna_cena").html('ADVANCED');
+    //DIV CENOVNIK
+
+  };
+
+
+
+                                                          $("#srpski").click(function(){
+                                                                 $("#naslov_index").html("Trikorijum Fakturisanje");
+                                                                 $("#dugme_pocetna").html("Pocetna");
+                                                                 $("#dugme_o_nama").html("O nama");
+                                                                 $("#dugme_logovanje").html("Prijavi se");
+                                                                 $("#dugme_cena").html("Cena");
+                                                                 $("#dugme_video_uputstva").html("Video uputstva");
+                                                                 $("#dugme_kontakt").html("Kontakt");
+
+                                                                 $("#dugme_pocetna_pomocno").html("Pocetna");
+                                                                 $("#dugme_o_nama_pomocno").html("O nama");
+                                                                 $("#dugme_logovanje_pomocno").html("Prijavi se");
+                                                                 $("#dugme_cena_pomocno").html("Cena");
+                                                                 $("#dugme_video_uputstva_pomocno").html("Video uputstva");
+                                                                 $("#dugme_kontakt_pomocno").html("Kontakt");
+
+                                                                 $("#text_o_registraciji").html("Jos uvek nemate nalog na Trikorijum Fakturisanje?");
+                                                                 $("#dugme_registracija").html("REGISTRUJTE SE");
+
+                                                                 $("#naslovh5").html("Unos podataka o korisniku i firmi");
+                                                                 $("#strelica1").html("Podaci o korisniku");
+                                                                 $("#strelica2").html("Podaci o firmi");
+                                                                 $("#strelica3").html("Podaci o firmi");
+                                                                 $("#strelica4").html("kontak firme");
+                                                                 $("#naslov_korisnika_koji_mi_salje_poruke").html("Sve vase sugestije i pitanja mozete nam proslediti ovde");
+                                                                 $("#dugme_posalji_korisnika_koji_mi_salje_poruke").val("Posalji");
+                                                                 $("#email_korisnika_koji_mi_salje_poruke").attr("placeholder", "Vas e-mail");
+                                                                 $("#poruka_korisnika_koji_mi_salje_poruke").attr("placeholder", "Poruka");
+
+
+                                                                 $("#label_lozinka").html("Lozinka:");
+                                                                 $("#lozinka").attr("placeholder", "Lozinka");
+                                                                 $("#label_ime_vlasnika").html("Ime i prezime vlasnika:");
+                                                                 $("#ime_vlasnika").attr("placeholder", "Ime i prezime vlasnika koje ce se prikazivati na fakturi");
+
+                                                                 $("#label_ime_firme").html("Ime Firme:");
+                                                                 $("#ime_firme").attr("placeholder", "Ime Firme");
+                                                                 $("#label_adresa_firme").html("Adresa Firme:");
+                                                                 $("#adresa_firme").attr("placeholder", "Adresa Firme");
+                                                                 $("#label_lokacija_firme").html("Lokacija Firme:");
+                                                                 $("#lokacija_firme").attr("placeholder", "Lokacija Firme/Grad");
+
+                                                                 $("#label_pib_firme").html("Pib Firme:");
+                                                                 $("#pib_firme").attr("placeholder", "Pib Firme");
+                                                                 $("#label_maticni_br_firme").html("Maticni broj Firme:");
+                                                                 $("#maticni_br_firme").attr("placeholder", "Maticni broj Firme");
+                                                                 $("#label_opis_firme").html("Opis firme:");
+                                                                 $("#opis_firme").attr("placeholder", "Opis firme cime se bavi");
+
+                                                                 $("#label_ziro_racun").html("Ziro Racun:");
+                                                                 $("#ziro_racun").attr("placeholder", "Ziro Racun");
+                                                                 $("#label_broj_telefona").html("Broj telefona u formatu (xxx-xxx-xxxx)");
+                                                                 $("#label_fix_br_telefona").attr("placeholder", "Fix broj telefona:");
+                                                                 $("#modal_uslovi_koriscenja").html("Prihvatam uslove koriscenja");
+
+                                                                 $("#nazad").val("Predhodno");
+                                                                 $("#napred").val("Sledece");
+                                                                 $("#sacuvaj").val("Sacuvaj");
+                                                                 $("#cancel").val("Ponisti");
+                                                                 $("#zatvori").val("Zatvori");
+
+                                                                 $("#password").attr("placeholder", "Lozinka");
+                                                                 $("#posalji").html("Prijavite se");
+                                                                 $("#dugme_registruj_se").html("Registruj se");
+                                                                 $("#link_zaboravljena_lozinka").html("Zaboravljena lozinka");
+                                                                 $("#label_zapamti_me").html("Zapamti me");
+
+
+                                                                 //USLOVI KORISCENJA
+                                                                 $("#exampleModalScrollableTitle").html('Uslovi koriscenja');
+                                                                 $("#prvi_paragraf").html('Molimo pažljivo pročitajte našu politiku privatnosti kako biste jasno razumeli kako sakupljamo, koristimo, stitimo ili na neki drugi način rukujemo, Vašim ličnim podacima u skladu sa našim sajtom. Korišćenjem ovog sajta prihvatate i politiku privatnosti.');
+                                                                 $("#drugi_podnaslov").html('Koje lične podatke prikupljamo od ljudi koji posećuju ovaj sajt?');
+                                                                 $("#drugi_paragraf").html('Ime, Prezime, Email adresu, Ime firme, Adresu, PIB, Maticni br firme, Ziro racun, Broj mobilnog i fiksnog telefona  IP adresu korisnika. Ipak, sajt možete posetiti i anonimno.');
+                                                                 $("#treci_podnalov").html('Kada sakupljamo lične informacije?');
+                                                                 $("#treci_pagargaf").html('Mi prikupljamo podatke od Vas kada se pretplatite na koriscenje aplikacije, posaljete nam poruku uz pomoc naseg sajta ili posetite sajt.');
+                                                                 $("#cetvrti_podnaslov").html('Ukratko:');
+                                                                 $("#prvi_clan_prve_liste").html('Prilikom posete sajtu: IP adresu, kolačići');
+                                                                 $("#drugi_clan_prve_liste").html('Prilikom slanja Email poruke preko kontakt forme: Ime (uvek), Email (uvek)');
+                                                                 $("#treci_clan_prve_liste").html('Prilikom popunjavanja registracije forme: Ime (uvek), Prezime (uvek), Email (uvek), Ime firme (uvek), Adresu (uvek), PIB (uvek), Maticni broj firme (uvek), Ziro racun (uvek), Br.mobilnog (uvek)');
+                                                                 $("#peti_podnaslov").html('Kako koristimo Vaše podatke?');
+                                                                 $("#cetvrti_paragraf").html('Sve informacije koje sakupljamo od Vas mogu se koristiti na jedan od sledećih načina:');
+                                                                 $("#prvi_clan_druge_liste").html('Da personalizujmo Vaše iskustvo na sajtu (Vaše informacije nam pomažu da bolje odgovorimo na Vaše individualne potrebe)');
+                                                                 $("#drugi_clan_druge_liste").html('Da poboljšamo našu veb stranicu');
+                                                                 $("#treci_clan_trece_liste").html('Za zaštitu našeg sajta (Vaša IP adresa može biti blokirana ako pokušate da na bilo koji način nanesete bilo kakvu štetu sajtu)');
+                                                                 $("#peti_paragraf").html('Podatke koje ostavite na Trikorijum fakturisanje ce se iskljucivo koristiti za potrebe rada ovog sajta');
+                                                                 $("#sesti_paragraf").html('Trikorijum fakturisanje ne prosledjuje, ne prodaje, niti iznajmljuje vase podatke');
+                                                                 $("#sesti_podnaslov").html('Kako štitimo Vaše informacije?');
+                                                                 $("#sedmi_paragraf").html('Sve informacije, pogotovo one osetljive i lične, koje razmenjujete sa ovim sajtom štite se pomoću tehnologije Secure Socket Layer (SSL).');
+                                                                 $("#sedmi_podnaslov").html('Linkovi trećih strana');
+                                                                 $("#osmi_paragraf").html('Povremeno, po našem nahođenju, možemo da uključimo ili ponudimo proizvode i usluge nezavisnih proizvođača na našoj veb lokaciji. Ove treće strane imaju zasebne i nezavisne politike privatnosti. Stoga nemamo nikakvu odgovornost niti odgovornost za sadržaj i aktivnosti ovih povezanih sajtova. Mi želimo zaštititi integritet našeg sajta.');
+                                                                 $("#dugme_zatvori_modal_uslove_koriscenja").val('Zatvori');
+                                                                 $("#dugme_prihvatam_uslove_koriscenja").val('Prihvatam');
+                                                                 //USLOVI KORISCENJA
+
+                                                                 //O NAMA
+                                                                 $("#o_nama_naslov").html('O nama');
+                                                                 $("#text_o_nama_naslov").html('Brzo i lako moze svako');
+                                                                 $("#o_nama_1_paragraf").html('Na brz i lak nacin uz pomoc Trikorijum Fakturisanje programa mozete voditi svoje poslovanje iz udobnosti svog doma vrlo profesionalno.<br>Trikorijum je napredna i proaktivna aplikacija uz koju Brzo i lako moze svako da je koristi za usluge koje su vam potrebne.');
+                                                                 $("#o_nama_2_paragraf").html('Neka sve vase fakture budu na jednom mestu,Od sad dostupne svuda gde imate pristup internetu.');
+                                                                 $("#o_nama_3_paragraf").html('Generisite vas brend na fakturama, cuvajte, stornirajte, stampajte, NEKA VAM SVE VASE FAKTURE BUDU NA DOHVAT RUKE.');
+                                                                 $("#o_nama_4_paragraf").html('DEMO verzuju programa mozete isprobati <a id="dugme_demo" href="#">ovde.</a>');
+                                                                 $("#o_nama_5_paragraf").html('Nas cenovnik mozete pogledati <a href="#" id="ka_cenovniku_iz_texta">ovde.</a>');
+                                                                 $("#o_nama_6_paragraf").html('Trikorijum Fakturisanje pamti vase cesto unosene artikle prilikom izrade faktura i automatizovano vam prvo njih nudi pri svakom sledecem unosu artikala.');
+                                                                 $("#o_nama_7_paragraf").html('Brza pretraga svih faktura na jednom mestu u samo par koraka');
+                                                                 $("#o_nama_8_paragraf").html('Jednostavna izmena vasih podataka (koji se prikazuju na fakturama) ili podataka vasih klijenata u samoj aplikaciji.');
+                                                                 $("#o_nama_9_paragraf").html('Mogucnost slanja faktura na E-mail klijentima u par klika.');
+                                                                 $("#o_nama_10_paragraf").html('Pored same izrade Faktura, program nudi jos mnostvo opcija.');
+                                                                 //O NAMA
+
+                                                                 // DIV SA LISTOM
+                                                                 $("#tabela_naslov").html('Fakture');
+                                                                 $("#tabela_1_stavka").html('Cuvanje svih tvojih prethodnih unosa');
+                                                                 $("#tabela_2_stavka").html('Baza svih tvojih komintenta na jednom mestu');
+                                                                 $("#tabela_3_stavka").html('Lak pregled placenih i neplacenih faktura');
+                                                                 $("#tabela_4_stavka").html('Lak pregled faktura po godinama pravljenja');
+                                                                 $("#tabela_5_stavka").html('Fakture u RSD ili EUR - valuti');
+                                                                 $("#tabela_6_stavka").html('Jednostavno dodavanje vaseg brenda na fakturama');
+                                                                 $("#tabela_7_stavka").html('Odabir jednog od vise razlicitih dizajna faktura');
+                                                                 $("#tabela_8_stavka").html('Brzo stampanje faktura');
+                                                                 $("#tabela_9_stavka").html('Slanje faktura na e-mail komintentima u samo par klikova');
+                                                                 // DIV SA LISTOM
+
+                                                                 //DIV CENOVNIK
+                                                                 $("#cenovnik_naslov").html('Cenovnik');
+                                                                 $("#pasus_o_odabiru_paketa").html('Izaberite jedan od paketa koji vam najvise odgovara');
+                                                                 $("#naslov_osnovna_cena").html('OSNOVNI');
+                                                                 $("#naslov_standardna_cena").html('STANDARD');
+                                                                 $("#naslov_napredna_cena").html('NAPREDNI');
+                                                                 //DIV CENOVNIK
+                                                      });
+
+
+
+
+
+
+                                                       $("#engleski").click(function(){
+                                                                   $("#naslov_index").html("Trikorijum Fakturisanje");
+                                                                   $("#dugme_pocetna").html("Home");
+                                                                   $("#dugme_o_nama").html("About us");
+                                                                   $("#dugme_logovanje").html("Log in");
+                                                                   $("#dugme_cena").html("Price");
+                                                                   $("#dugme_video_uputstva").html("Video instructions");
+                                                                   $("#dugme_kontakt").html("Contact");
+
+                                                                   $("#dugme_pocetna_pomocno").html("Home");
+                                                                   $("#dugme_o_nama_pomocno").html("About us");
+                                                                   $("#dugme_logovanje_pomocno").html("Log in");
+                                                                   $("#dugme_cena_pomocno").html("Price");
+                                                                   $("#dugme_video_uputstva_pomocno").html("Video instructions");
+                                                                   $("#dugme_kontakt_pomocno").html("Contact");
+
+                                                                   $("#text_o_registraciji").html("Do not have an account on Trikorijum Fakturisanje?");
+                                                                   $("#dugme_registracija").html("SIGN UP");
+                                                                   $("#naslov_korisnika_koji_mi_salje_poruke").html("All your suggestions and questions can be forwarded to us here");
+                                                                   $("#dugme_posalji_korisnika_koji_mi_salje_poruke").val("Send");
+                                                                   $("#email_korisnika_koji_mi_salje_poruke").attr("placeholder", "Your e-mail");
+                                                                   $("#poruka_korisnika_koji_mi_salje_poruke").attr("placeholder", "Message");
+
+                                                                   $("#naslovh5").html("Entering data about the user and company");
+                                                                   $("#strelica1").html("User data");
+                                                                   $("#strelica2").html("Company data");
+                                                                   $("#strelica3").html("Company data");
+                                                                   $("#strelica4").html("Contact company");
+
+
+                                                                   $("#label_lozinka").html("Password:");
+                                                                   $("#lozinka").attr("placeholder", "Password");
+                                                                   $("#label_ime_vlasnika").html("Name and surname of Owner:");
+                                                                   $("#ime_vlasnika").attr("placeholder", "Name and surname of the owner, which will be shown on the invoice");
+
+                                                                   $("#label_ime_firme").html("Company name:");
+                                                                   $("#ime_firme").attr("placeholder", "Company name");
+                                                                   $("#label_adresa_firme").html("Company address:");
+                                                                   $("#adresa_firme").attr("placeholder", "Company address");
+                                                                   $("#label_lokacija_firme").html("Companies location:");
+                                                                   $("#lokacija_firme").attr("placeholder", "Companies location/Citi");
+
+                                                                   $("#label_pib_firme").html("PIB companies:");
+                                                                   $("#pib_firme").attr("placeholder", "PIB companies");
+                                                                   $("#label_maticni_br_firme").html("Identification number of the company:");
+                                                                   $("#maticni_br_firme").attr("placeholder", "Identification number of the company");
+                                                                   $("#label_opis_firme").html("Description of the company:");
+                                                                   $("#opis_firme").attr("placeholder", "Description of the company");
+
+                                                                   $("#label_ziro_racun").html("Bank account:");
+                                                                   $("#ziro_racun").attr("placeholder", "Bank account");
+                                                                   $("#label_broj_telefona").html("Phone number format (xxx-xxx-xxxx)");
+                                                                   $("#label_fix_br_telefona").html("Phone number landline:");
+                                                                   $("#modal_uslovi_koriscenja").html("I accept the terms of use");
+
+                                                                   $("#nazad").val("Previous");
+                                                                   $("#napred").val("Next");
+                                                                   $("#sacuvaj").val("Finish");
+                                                                   $("#cancel").val("Cancel");
+                                                                   $("#zatvori").val("Close");
+
+                                                                   $("#password").attr("placeholder", "Password");
+                                                                   $("#posalji").html("Login");
+                                                                   $("#dugme_registruj_se").html("Registration");
+                                                                   $("#link_zaboravljena_lozinka").html("Forgot password");
+                                                                   $("#label_zapamti_me").html("Remember me");
+
+
+                                                                   //USLOVI KORISCENJA
+                                                                   $("#exampleModalScrollableTitle").html('Conditions of Use');
+                                                                   $("#prvi_paragraf").html('Please read our privacy policy to clearly understand how we collect, use, protect or otherwise handle, your personal information in accordance with this site. By using this site you agree to the privacy policy.');
+                                                                   $("#drugi_podnaslov").html('What personal information do we collect from people who visit this site?');
+                                                                   $("#drugi_paragraf").html('Name, Last Name, Email address, company name, address, TIN, registration number of the company, Bank account number, mobile and fixed telephone IP address of the user. However, you can visit the site anonymously.');
+                                                                   $("#treci_podnalov").html('When we collect personal information?');
+                                                                   $("#treci_pagargaf").html('We collect information from you when you subscribe to use the application, send us a message with our site or visit the web site.');
+                                                                   $("#cetvrti_podnaslov").html('In short:');
+                                                                   $("#prvi_clan_prve_liste").html('When you visit the website: IP address, cookies');
+                                                                   $("#drugi_clan_prve_liste").html('When sending mail via the contact form: Name (always), Email (always)');
+                                                                   $("#treci_clan_prve_liste").html('When filling out the registration form: Name (always) Surname (always), Email (always) Name of company (always), addresses (always), TIN (always), company registration number (always) Bank account (always), Br.mob (always)');
+                                                                   $("#peti_podnaslov").html('How we use your information?');
+                                                                   $("#cetvrti_paragraf").html('All information we collect from you may be used in one of the following ways:');
+                                                                   $("#prvi_clan_druge_liste").html('Yes improve your experience on the site (your information helps us to better respond to your individual needs)');
+                                                                   $("#drugi_clan_druge_liste").html('To improve our website');
+                                                                   $("#treci_clan_trece_liste").html('For the protection of our site (your IP address can be blocked if you try in any way inflict any damage to the site)');
+                                                                   $("#peti_paragraf").html('The information you provide on Trikorijum invoicing will be used exclusively for the needs of this site');
+                                                                   $("#sesti_paragraf").html('Trikorijum fakturisanje is not forwarded, sell, or rent your information');
+                                                                   $("#sesti_podnaslov").html('How we protect your information?');
+                                                                   $("#sedmi_paragraf").html('All information, especially those sensitive and personal, that you exchange with this site are protected using Secure Socket Layer (SSL).');
+                                                                   $("#sedmi_podnaslov").html('Third party links');
+                                                                   $("#osmi_paragraf").html('Occasionally, at our discretion, we may include or offer products and services of independent producers on our website. These third parties have separate and independent privacy policies. Therefore, we do not have any responsibility or liability for the content and activities of these linked sites. We want to protect the integrity of our site.');
+                                                                   $("#dugme_zatvori_modal_uslove_koriscenja").val('Close');
+                                                                   $("#dugme_prihvatam_uslove_koriscenja").val('I accept');
+                                                                   //USLOVI KORISCENJA
+
+                                                                   //O NAMA
+                                                                   $("#o_nama_naslov").html('About us');
+                                                                   $("#text_o_nama_naslov").html('Everybody can quickly and easily');
+                                                                   $("#o_nama_1_paragraf").html('In a quick and easy way with the help of Tricorium Fakturisanje Program you can manage your business from the comfort of your home very professionally.<br>Tricorium is an advanced and proactive application with which Quickly and easily anyone can use it for the services you need.');
+                                                                   $("#o_nama_2_paragraf").html('Let all your invoices be in one place, From now available wherever you have Internet access.');
+                                                                   $("#o_nama_3_paragraf").html('Generate your brand on invoices, save, reverse, print, SOME OF YOUR FACTORS WILL BE INVOLVED IN THE DOOM OF HAND.');
+                                                                   $("#o_nama_4_paragraf").html('You can try the DEMO version of the program <a id="dugme_demo" href="#">here.</a>');
+                                                                   $("#o_nama_5_paragraf").html('You can see our price list <a href="#" id="ka_cenovniku_iz_texta">here.</a>');
+                                                                   $("#o_nama_6_paragraf").html('Tricorum Fakturisanje reminds you of often inbred items when creating invoices and automatically offers you first for each subsequent entry of the item.');
+                                                                   $("#o_nama_7_paragraf").html('Quick search of all invoices in one place in just a few steps');
+                                                                   $("#o_nama_8_paragraf").html('Easily change your data (shown on invoices) or your clients data in the application itself.');
+                                                                   $("#o_nama_9_paragraf").html('The ability to send invoices to E-mail clients in a pair of clicks.');
+                                                                   $("#o_nama_10_paragraf").html('In addition to the factoring itself, the program offers many more options.');
+                                                                   //O NAMA
+
+                                                                   // DIV SA LISTOM
+                                                                   $("#tabela_naslov").html('Invoices');
+                                                                   $("#tabela_1_stavka").html('Keep all of your previous entries');
+                                                                   $("#tabela_2_stavka").html('Base all your comments in one place');
+                                                                   $("#tabela_3_stavka").html('Easy overview of paid and unpaid invoices');
+                                                                   $("#tabela_4_stavka").html('Easy to view invoices by years of making');
+                                                                   $("#tabela_5_stavka").html('Invoices in RSD or EUR - currency');
+                                                                   $("#tabela_6_stavka").html('Easily add your brand to invoices');
+                                                                   $("#tabela_7_stavka").html('Choosing one of several different designs of invoices');
+                                                                   $("#tabela_8_stavka").html('Fast printing invoices');
+                                                                   $("#tabela_9_stavka").html('Send invoices to e-mail clients in just a few clicks');
+                                                                   // DIV SA LISTOM
+
+                                                                   //DIV CENOVNIK
+                                                                   $("#cenovnik_naslov").html('Pricelist');
+                                                                   $("#pasus_o_odabiru_paketa").html('Choose one of the packages that best suits you');
+                                                                   $("#naslov_osnovna_cena").html('BASIC');
+                                                                   $("#naslov_standardna_cena").html('STANDARD');
+                                                                   $("#naslov_napredna_cena").html('ADVANCED');
+                                                                   //DIV CENOVNIK
+
+
+                                                      });
+})
