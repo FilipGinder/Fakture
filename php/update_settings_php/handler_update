@@ -1,0 +1,30 @@
+<?php
+require_once 'class_update.php';
+
+if(isset($_POST['verifikacija_obrisi_nalog']))
+{
+  $objekat = new class_update();
+  $rezultat = $objekat->obrisi_nalog();
+  exit(json_encode($rezultat));
+}
+
+if(isset($_POST['verifikacija_promena_licnih_podataka_bez_lozinke']))
+{
+  $objekat = new class_update();
+  $rezultat = $objekat->promena_licnih_podataka_bez_lozinke();
+  exit(json_encode($rezultat));
+}
+
+if(isset($_POST['verifikacija_promena_licnih_podataka_sa_lozinkom']))
+{
+  $objekat = new class_update();
+  $rezultat = $objekat->promena_licnih_podataka_sa_lozinkom();
+  exit(json_encode($rezultat));
+}
+if(isset($_POST['value']))   //provera lozinke
+{
+  $objekat = new class_update();
+  $rezultat = $objekat->provera_lozinke();
+  exit(json_encode($rezultat));
+}
+ ?>
