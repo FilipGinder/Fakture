@@ -1,0 +1,21 @@
+<div class="container" id="lg">
+
+      <table class="table table-bordered" id="tabela_kon">
+             <thead>
+                   <tr>
+                     <td><b>Ime Firme</b></td>
+                     <td><b>PIB Firme</b></td>
+                     <td><b>Ime Vlasnika</b></td>
+                     <td><b>Br Telefona</b></td>
+                     <td><b>E-mail</b></td>
+                     <td><b>Period koriscenja</b></td>
+                     <td><b>Dodati vreme</b></td>
+                     <td><b>On/Off</b></td>
+                   </tr>
+             </thead>
+             <tbody>
+
+             </tbody>
+     </table>
+     <input type="button" class="btn btn-success" id="izadji_ad" value="Izadji">
+</div>
