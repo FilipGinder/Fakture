@@ -1,0 +1,234 @@
+#forma_za_slanje_emaila{
+  height: 700px;
+  clear: both;
+  position: fixed;
+  top: 45px;
+  right: 0;
+  background-color: lightgray;
+  z-index: 1;
+  display: none;
+  padding: 10px;
+}
+#dugme_posalji_email{
+  width: 100%;
+  text-align: center;
+}
+#posalji_fakturu_emailom{
+  border-radius: 50px;
+}
+.potpisi{
+  display: none;
+  clear: both;
+  width:100%;
+}
+ #levi_potpis{
+  width:30%;
+  margin-top: 2.5cm;
+  height:1px;
+  float: left;
+  border-top:2px solid black;
+}
+#pecat{
+ width:40%;
+ margin-top: 2.5cm;
+ float:left;
+ text-align: center;
+}
+#desni_potpis{
+  width:30%;
+  margin-top: 2.5cm;
+  float:left;
+  height:1px;
+  border-top:2px solid black;
+}
+.ukupne_cifre {
+   width: 7cm;
+   float:right;
+   border:2px solid black;
+
+ }
+#paragraf_za_placanje{
+float:left;
+margin-top: 3.8cm;
+}
+#za_placanje{
+  float:right;
+}
+#paragraf_cena{
+  margin-left: 17px;
+ }
+ #paragraf_pdv{
+   margin-left: 45px;
+ }
+ #paragraf_rabat{
+   margin-left: 76px;
+ }
+ #ukupaa_cena_bez_pdv{
+ float: right;
+ padding-right: 5px;
+ }
+ #ukupan_iznos_pdv{
+  float: right;
+ padding-right: 5px;
+ }
+ #ukupna_ukupna_vrednost{
+  float: right;
+ padding-right: 5px;
+ }
+ #ukupan_rabat{
+   float: right;
+  padding-right: 5px;
+ }
+ #navic{
+   float:left;
+   width:60%;
+ }
+ #navic2{
+   float:left;
+   width:40%;
+ }
+ #dugme_za_nazad_sa_pregleda{
+   margin-bottom: 4px;
+   float:right;
+ }
+ #nav{
+   height: 45px;
+ }
+ #podaci_kupca{
+   background-color: #CDC9C9;
+   float:right;
+   height: 2cm;
+   width:13.2cm;
+   position: relative;
+   top:-2.5cm;
+ }
+ #podaci_kupca_gornji_deo{
+   width:100%;
+   height:1cm;
+ }
+ #podaci_kupca_donji_deo{
+   width:100%;
+   height:1cm;
+ }
+ #div_pasus_naslov{
+   height:1cm;
+   width:6.6cm;
+   float: left;
+   padding-left: 3px;
+ }
+ #div_pasus_email{
+   height:1cm;
+   width:6.6cm;
+   float: right;
+   text-align: right;
+   padding-right: 3px;
+ }
+ #div_pasus_pib{
+   height:1cm;
+   width:3.7cm;
+   float: left;
+   text-align: left;
+   padding-left: 3px;
+   padding-bottom: 3px;
+ }
+ #div_pasus_datum{
+   height:1cm;
+   width:4cm;
+   float: left;
+   padding-bottom: 3px;
+ }
+ #div_pasus_lokacija{
+   height:1cm;
+   width:5.5cm;
+   float: left;
+   text-align: right;
+   padding-right: 3px;
+   padding-bottom: 3px;
+ }
+ #pasus_datum{
+   position: relative;
+   top: 15px;
+}
+#pasus_pib{
+position: relative;
+top: 15px;
+}
+#pasus_lokacija{
+position: relative;
+top: 15px;
+}
+ #papir{
+   margin-top: 30px;
+   width:100%;
+   height:38.5cm;
+   /* border:3px solid green; */
+    padding-top: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+ }
+ #ime_firme_za_stampanje{
+   font-size: 55px;
+ }
+ #ime_primaoca_emaila{
+   width: 100%;
+   background-color: #0DFFB0;
+   border-radius: 5px;
+ }
+ #naslov_emaila{
+   border-radius: 5px;
+   width: 100%;
+ }
+ #textarea_emaila{
+   border-radius: 5px;
+ }
+ #naslov_tabele_za_stampanje{
+   background-color:#CDC9C9;
+ }
+ #tabla_za_stampanje{
+   width:100%;
+
+ }
+ #dole{
+
+   width: 100%;
+ }
+ #dugme_stampaj{
+    float:left;
+    margin-right: 10px;
+  }
+  #posalji_emailom_fakturu{
+    float: left;
+    margin-right: 10px;
+  }
+  #oznaka_dokumenta{
+    margin:auto;
+  }
+ #prikazi_kao_predracun{
+   float: left;
+   margin-right: 10px;
+ }
+ #predracun_naslov{
+   display:block;
+   font-size: 40px;
+   font-family: 'Patua One', cursive;
+ }
+ #napomena{
+   width: 40%;
+   height:120px;
+   border:1px solid black;
+ }
+ #select_placeno-nije_placeno{
+   border-radius: 5px;
+ }
+ #ispis_o_trenutnom_statusu{
+   font-size: 23px;
+   padding: 3px;
+   background-color: red;
+   border-radius: 10px;
+   margin-right: 25px;
+ }
+ #ispis_o_uspesno_promenjenom_statusu{
+   padding: 3px;
+   border-radius: 5px;
+   display: none;
+ }
