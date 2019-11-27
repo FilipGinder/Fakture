@@ -1,0 +1,323 @@
+<?php
+//OVDE IMAMO FUNKCIJE login_demo,login,unos_podataka_korisnika...sto bih inace bilo tri stranice :)
+
+
+use PHPMailer\PHPMailer\PHPMailer;              //ovde ispred klase uvozimo phpMailer koji nam treba za funkciju zaboravljena lozinka
+include_once "../../PHPMailer/PHPMailer.php";
+include_once "../../PHPMailer/Exception.php";
+include_once "../../PHPMailer/SMTP.php";
+session_start();
+class class_index
+{
+    function login_demo()
+    {
+      $_SESSION['id'] = 183;                     //  ako je pokrenuta demo verzija onda samo definise da je sesija 183 i sve pokazuje iz baze vezano za taj ID
+      exit(json_encode('Uspesno logovanje-demo'));
+    }
+
+
+    function login()
+    {
+                    include ('../../konekcija.php');
+
+                    $email = mysqli_real_escape_string($konekcija,$_POST['email']);
+                    $password = mysqli_real_escape_string($konekcija,$_POST['lozinka']);
+
+
+
+                    if(isset($_POST['zapamti_me'])){
+                    	$zapamti_me = $_POST['zapamti_me'];   //PREUZIMAMO VREDNOST checkbox-a BILO PRAZNA ILI NE
+                    }
+
+                    setcookie($email, $password, time() + (10), "/");
+
+
+                    $upit="SELECT id,lozinka FROM korisnici WHERE email='$email'";
+                    $rezultat=$konekcija->prepare($upit);
+                    $rezultat->execute();
+                    $rezultat->bind_result($id,$lozinka_iz_baze);
+
+                    $brojac=0;
+                    while($rezultat->fetch()){
+                    	$brojac++;
+                    }
+                    $konekcija->close();
+
+
+                     if($brojac==1 && $password === $lozinka_iz_baze){ //AKO JE LOZINKA INDENTICNA LOGOVANJE JE DOZVOLJENO
+
+                    	if(!empty($zapamti_me))   //AKO NIJE PRAZNA PRAVIMO KOLACICE
+                    			 {
+                    											// if($status_o_placenosti > date("Y-m-d H:i:s"))
+                    											// {
+                    																 //lozinku prilikom pravljenja cookia prvo kodiramo(hasujemo) da brauzer sacuva kao kriptovan podatak a zatim kad se ucita stranica
+                    																 //gde je logovanje(index.php) prvo cooki dekodujemo a zatim ga tako prikazemo u inputu za password OVO RADIMO DA U BRAUZERU NE BIH BILA
+                    														     //VIDLJIVA LOZINKA U PODESAVANJIMA GDE SU KOLACICI!!!
+                    																 $passwordhash = base64_encode($password);
+                    																 setcookie("EMAIL", $email, time() + (86400 * 30), "/");
+                    																 setcookie("pass", $passwordhash, time() + (86400 * 30), "/");  //FORMIRANI KOLACICI ZA EMAIL I PASSWORD KOJI TRAJU MESEC DANA. BRAUZER IH PAMTI
+                    																 $_SESSION['id']=$id;
+                    																 exit(json_encode('Uspesno logovanje'));
+                    								// 	  }
+                    								// else{
+                    								// 			           exit(json_encode("Vase obaveze nisu izmirene"));
+                    								// 		}
+                    			 }
+
+
+
+                    	 else{
+                      //
+                      //                   if($status_o_placenosti > date("Y-m-d H:i:s"))
+                    	// 									{
+                    															$_SESSION['id']=$id;
+                    										 				  exit(json_encode('Uspesno logovanje'));
+                    	// 									}
+                      //
+                    	// 					  	else{
+                    	// 												    exit(json_encode("Vase obaveze nisu izmirene"));
+                    	// 									}
+                    	 		 }
+
+                    }
+
+
+
+                    else if ($brojac==1 && base64_encode($password) == $lozinka_iz_baze){
+                    	if(!empty($zapamti_me))   //AKO NIJE PRAZNA PRAVIMO KOLACICE
+                    			 {
+
+                    									 // if($status_o_placenosti > date("Y-m-d H:i:s"))
+                    									 // {
+                    													 //lozinku prilikom pravljenja cookia prvo kodiramo(hasujemo) da brauzer sacuva kao kriptovan podatak a zatim kad se ucita stranica
+                    													 //gde je logovanje(index.php) prvo cooki dekodujemo a zatim ga tako prikazemo u inputu za password OVO RADIMO DA U BRAUZERU NE BIH BILA
+                    													 //VIDLJIVA LOZINKA U PODESAVANJIMA GDE SU KOLACICI!!!
+                    													 $passwordhash = base64_encode($password);
+                    													 setcookie("EMAIL", $email, time() + (86400 * 30), "/");
+                    													 setcookie("pass", $passwordhash, time() + (86400 * 30), "/");  //FORMIRANI KOLACICI ZA EMAIL I PASSWORD KOJI TRAJU MESECDANA. BRAUZER IH PAMTI
+                    													 $_SESSION['id']=$id;
+                    													 exit(json_encode('Uspesno logovanje'));
+                    					//				 }
+
+                    				// 		   else{
+                    	 			// 								   exit(json_encode("Vase obaveze nisu izmirene"));
+                    	 			// 					  }
+                           //
+                    			  }
+                    	  else{
+                       //
+                       //
+                       //               if($status_o_placenosti > date("Y-m-d H:i:s"))
+                    		// 						 {
+                    		 									 $_SESSION['id']=$id;
+                    		 									 exit(json_encode('Uspesno logovanje'));
+                    		// 						 }
+                       //
+                    		// 						 else{
+                    		//  											   exit(json_encode("Vase obaveze nisu izmirene"));
+                    		  								  }
+                    		 //	 }
+
+                    }
+                    else if ($email== "Admin" && $password == "Filip Ginder")
+                            {
+                                    $_SESSION['admin']='ja';
+                                    exit(json_encode("Dobrodosao admine"));
+                            }
+                    else if ($brojac==0){
+                      	exit(json_encode('Nismo pronasli vas EMAIL!'));
+                      }
+                    else if ($brojac==1 && base64_encode($password) != $lozinka_iz_baze)
+                                  {exit(json_encode("Pogresna lozinka"));
+                    }
+                    else {
+                    	exit(json_encode('ERROR'));
+                    }
+                  }
+
+
+  function unos_podataka_korisnika()
+  {
+                          include ('../../konekcija.php');
+
+
+                          $ime_firme = mysqli_real_escape_string($konekcija,$_POST['ime_firme']);
+                          $adresa_firme = mysqli_real_escape_string($konekcija,$_POST['adresa_firme']);
+                          $lokacija_firme = mysqli_real_escape_string($konekcija,$_POST['lokacija_firme']);
+                          $pib_firme = mysqli_real_escape_string($konekcija,$_POST['pib_firme']);
+                          $maticni_br_firme = mysqli_real_escape_string($konekcija,$_POST['maticni_br_firme']);
+                          $opis_firme = mysqli_real_escape_string($konekcija,$_POST['opis_firme']);
+                          $ziro_racun = mysqli_real_escape_string($konekcija,$_POST['ziro_racun']);
+                          $ime_vlasnika = mysqli_real_escape_string($konekcija,$_POST['ime_vlasnika']);
+                          $broj_telefona = mysqli_real_escape_string($konekcija,$_POST['broj_telefona']);
+                          $fix_br_telefona = mysqli_real_escape_string($konekcija,$_POST['fix_br_telefona']);
+                          $email = mysqli_real_escape_string($konekcija,$_POST['email']);
+                          $lozinka = mysqli_real_escape_string($konekcija,$_POST['lozinka']);
+                          $poslednje_logovanje = "prvo logovanje";
+
+                          $provera = "SELECT * FROM korisnici WHERE email = '$email'";
+                          $rezultat_provere=$konekcija->prepare($provera);
+                          $rezultat_provere->execute();
+
+                          if($rezultat_provere->fetch() > 0) { exit(json_encode("Email vec postoji"));}
+
+                          else{
+
+                          if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+                            {
+                                     exit(json_encode("Nepravilno unet email"));
+                            }
+                          // else if(strlen($lozinka) < 6 || strcspn($lozinka, '0123456789') == strlen($lozinka) || strcspn($lozinka, 'abcdefghijklmnopqrstuvwxyz') == strlen($lozinka) || strcspn($lozinka, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') == strlen($lozinka) || strcspn($lozinka, '/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/Z') == strlen($lozinka))
+                          //   {
+                          //           exit(json_encode("Radi vase bezbednosti lozinka koju sve uneli mora u sebi sadrzati minimum jedan broj,minimum jedno malo slovo,minimum jedno veliko slovo,minimum jedan specijalan karakter i ne sme biti kraca od 6 karaktera"));
+                          //   }
+
+                                   else{
+
+                                  $passwordhash = password_hash("$lozinka",PASSWORD_BCRYPT); //hasuje sifru
+                                   $passwordhash = base64_encode($lozinka);
+
+                                   $upit="INSERT INTO korisnici(ime_firme,lokacija_firme,adresa_firme,pib_firme,maticni_br_firme,ziro_racun,opis_firme,ime_vlasnika,broj_telefona,fix_br_telefona,email,lozinka,poslednje_logovanje,vreme_trajanja_koriscenja_programa,slika,manualno_ukljuci_iskljuci)
+                                   VALUES ('$ime_firme','$lokacija_firme','$adresa_firme','$pib_firme','$maticni_br_firme','$ziro_racun','$opis_firme','$ime_vlasnika','$broj_telefona','$fix_br_telefona','$email','$passwordhash','$poslednje_logovanje', NOW() + INTERVAL 1 YEAR,'','0')";
+                                   $rezultat = $konekcija->prepare($upit);
+                                   $rezultat->execute();
+
+                                   mkdir("../../folder-logo/$ime_firme");  //kreira folder sa nazivom firme u koji ce se skladistiti njegova slika
+
+                                   $IDtog_novog_reda_u_bazi = mysqli_insert_id($konekcija);
+                                   //$konekcija->close();
+
+                                   setcookie("EMAIL", $email, time() + (86400 * 30), "/");
+                                   setcookie("pass", $passwordhash, time() + (86400 * 30), "/");  //FORMIRANI KOLACICI ZA EMAIL I PASSWORD KOJI TRAJU MESECDANA. BRAUZER IH PAMTI
+
+                                   $konekcija->close();
+                                       $mail = new PHPMailer();
+                             					  $mail->Host = "smtp.gmail.com";
+                             					  //$mail->IsSMTP();
+                             					  $mail->SMPTAuth = true;
+                             					  $mail->Username = "slanjefakture@gmail.com";
+                             					  $mail->Password = "8!slanjefakture!8";
+                             					  $mail->SMTPSecure = "tls";
+                             					  $mail->Port = 587;
+                             					  $mail->addAddress($email);
+                             					  $mail->setFrom('TrikorijumFakturisanje@gmail.com');
+                             					  $mail->Subject = 'Uplatnica';
+                             					  $mail->isHTML(true);
+                                        $mail->AddAttachment('../../slika/Nalog_za_uplatu.pdf','Nalog_za_uplatu.pdf');
+                             					  $mail->Body ="<p>U prilogu vam saljemo uplatnicu</p>" ;
+
+                                        if($mail->send()){
+                            					    exit(json_encode("Uspesna registracija"));
+                            					  }
+                            					  else{
+                            					    exit(json_encode("Uspesna registracija"));
+                            					  }
+
+
+
+                                  }
+                          }
+  }
+
+  function zaboravljena_lozinka()
+  {
+
+                    include ('../../konekcija.php');
+
+
+                    $email_zaboravljena_lozinka = mysqli_real_escape_string($konekcija,$_POST['email_zaboravljena_lozinka']);
+                    $email_zaboravljena_lozinka = htmlspecialchars($email_zaboravljena_lozinka);
+
+                    $upit = "SELECT id FROM korisnici WHERE email = '$email_zaboravljena_lozinka'";
+                    $rezultat = $konekcija->prepare($upit);
+                    $rezultat->execute();                   //prvo uzimamo email
+
+
+                    $rezultat->bind_result($ID);
+
+
+                    if($rezultat->fetch() > 0){
+
+
+                    						$string = "0123456789qwertyuiopasdfghjklzxcvbnm";
+                    						$string = str_shuffle($string);
+                    						$string = substr($string, 0, 10);
+                    					  $string = base64_encode($string);
+
+                    					  include ('../../konekcija.php');
+                    					  $upit1 = "UPDATE korisnici SET lozinka='$string' WHERE id = '$ID'";
+                    					  $rezultat1 = $konekcija->prepare($upit1);
+                    					  $rezultat1->execute();
+                    					  //mysqli_close($konekcija);
+
+
+                    					  $mail = new PHPMailer();
+                    					  $mail->Host = "smtp.gmail.com";
+                    					  //$mail->IsSMTP();
+                    					  $mail->SMPTAuth = true;
+                    					  $mail->Username = "slanjefakture@gmail.com";
+                    					  $mail->Password = "8!slanjefakture!8";
+                    					  $mail->SMTPSecure = "tls";
+                    					  $mail->Port = 587;
+                    					  $mail->addAddress($email_zaboravljena_lozinka);
+                    					  $mail->setFrom('Besplatnaizradafaktura@gmail.com');
+                    					  $mail->Subject = 'Resetovanje lozinke';
+                    					  $mail->isHTML(true);
+                    					  $mail->Body ="<p>Vasa nova privremena lozinka je '$string'</p><p>Cim se budete ulogovali promenite lozinku za bezbedniju!!</p>" ;
+
+                    					  if($mail->send()){
+                    					    exit(json_encode('Email je uspesno poslat!'));
+                    					  }
+                    					  else{
+                    					    exit(json_encode('Doslo je do greske prilikom slanja Emaila-a!'));
+                    					  }
+
+                    					exit(json_encode($string));
+                    }
+
+                    else
+                    {
+                    	exit(json_encode('Nismo uspeli da pronadjemo vasu Email adresu!'));
+                    }
+  }
+
+function slanje_poruke_iz_kontakt_diva()
+{
+  include ('../../konekcija.php');
+  $ime_posaljioca_iz_div_kontakt = mysqli_real_escape_string($konekcija,$_POST['ime_posaljioca_iz_div_kontakt']);
+  $ime_posaljioca_iz_div_kontakt = htmlspecialchars($ime_posaljioca_iz_div_kontakt);
+
+  $email_posaljioca_iz_div_kontakt = mysqli_real_escape_string($konekcija,$_POST['email_posaljioca_iz_div_kontakt']);
+  $email_posaljioca_iz_div_kontakt = htmlspecialchars($email_posaljioca_iz_div_kontakt);
+
+  $naslov_iz_div_kontakt = mysqli_real_escape_string($konekcija,$_POST['naslov_iz_div_kontakt']);
+  $naslov_iz_div_kontakt = htmlspecialchars($naslov_iz_div_kontakt);
+
+  $poruka_iz_div_kontakt = mysqli_real_escape_string($konekcija,$_POST['poruka_iz_div_kontakt']);
+  $poruka_iz_div_kontakt = htmlspecialchars($poruka_iz_div_kontakt);
+
+  $mail = new PHPMailer();
+  $mail->Host = "smtp.gmail.com";
+  //$mail->IsSMTP();
+  $mail->SMPTAuth = true;
+  $mail->Username = "slanjefakture@gmail.com";
+  $mail->Password = "8!slanjefakture!8";
+  $mail->SMTPSecure = "tls";
+  $mail->Port = 587;
+  $mail->addAddress('ginderfilip@gmail.com');
+  $mail->setFrom($ime_posaljioca_iz_div_kontakt);
+  $mail->Subject = $naslov_iz_div_kontakt;
+  $mail->isHTML(true);
+  $mail->Body = $poruka_iz_div_kontakt ;
+
+  if($mail->send()){
+    exit(json_encode('Email je uspesno poslat!'));
+  }
+  else{
+    exit(json_encode('Doslo je do greske prilikom slanja Emaila-a!'));
+  }
+}
+
+}
+
+ ?>
