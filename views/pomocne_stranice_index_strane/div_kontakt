@@ -1,0 +1,66 @@
+<div id="sesti_kontejner_okvir_zbog_pozadine">
+    <div class="container" id="sesti_kontejner">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 id="kontakt_naslov">Kontakt</h3>
+                <p class="text_kontakt">Stupite u kontakt sa nama. Zelimo da cujemo od vas o tome kako vam mozemo pruziti bolju podrsku i usluge...</p>
+                </div>
+                <div class="col-sm-4">
+                  <p class="podnaslovi_kontakt"><b>Adresa</b></p>
+                  <img class="slike_u_kontakt_divu" src="slika/placeholder.png" alt="lokacija">
+                  <p id="text_kontakta_pasus_adresa">Neka ulica</p>
+                  <p id="text_kontakta_pasus_grad">Beograd</p>
+                  <p id="text_kontakta_pasus_postanski_broj">11000</p>
+                </div>
+                <div class="col-sm-4">
+                  <p class="podnaslovi_kontakt"><b>Pozovite nas</b></p>
+                  <img class="slike_u_kontakt_divu" src="slika/smartphone.png" alt="telefon">
+                  <p id="text_kontakt_pozovite_nas"><span id="text_kontakt_pozovite_nas1">Pozovite nas 7/24!</span></p>
+                  <p  id="broj_kontakt_pozovite_nas"><a id="broj_kontakt_pozovite_nas_link" href="tel:+381 069 709 284">+381 069 709 284</a></p>
+                </div>
+                <div class="col-sm-4">
+                  <p class="podnaslovi_kontakt"><b>Brzi kontakt</b></p>
+                  <img class="slike_u_kontakt_divu" src="slika/email.png" alt="email">
+                  <p id="text_kontakt_email"><a id="text_kontakt_email_link" href="mailto:slanjefakture@gmail.com">slanjefakture@gmail.com</a></p>
+                </div>
+
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                  <p id="stupite_u_kontakt_sa_nama"><b>Stupite u kontakt sa nama</b></p>
+                  <label for="input_ime_iz_kontakt_diva" id="label_ime_iz_kontakt_diva">&nbsp;</label>
+                  <input class="form-control" placeholder="Vase Ime *" id="input_ime_iz_kontakt_diva" type="text" name="" value="">
+
+                  <label for="input_email_iz_kontakt_diva" id="label_email_iz_kontakt_diva">&nbsp;</label>
+                  <input class="form-control" placeholder="Vase Email *" id="input_email_iz_kontakt_diva" type="text" name="" value="">
+
+                  <label for="input_naslov_iz_kontakt_diva" id="label_naslov_iz_kontakt_diva">&nbsp;</label>
+                  <input class="form-control" placeholder="Naslov" id="input_naslov_iz_kontakt_diva" type="text" name="" value="">
+
+                  <label for="textarea_poruka_iz_kontakt_diva" id="label_textarea_iz_kontakt_diva">&nbsp;</label>
+                  <textarea class="form-control" placeholder="Vasa Poruka *" id="textarea_poruka_iz_kontakt_diva" name="name" rows="8"></textarea>
+
+                </div>
+                <div class="alert alert-success" id="obavestenje_o_slanju_emaila" role="alert">
+                  A simple success alert—check it out!
+                </div>
+
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4" style="margin-left:40px;">
+                  <input type="button" id="posalji_email_kontakt_div" name="" value="Posalji">
+                  <input type="button" id="resetuj_email_kontakt_div" name="" value="Resetuj">
+                </div>
+                <div class="col-md-4">
+                </div>
+
+                <div class="col-md-12">
+                  <p id="kako_do_nas_mapa"><b>Kako do nas<b></p>
+                   <iframe style="margin-top:0px; padding-top:0px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2829.993690320689!2d20.453282214925245!3d44.821693184105634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a654ba4f3f775%3A0x89186d0605c6b41a!2z0JfQvNCw0ZjQsCDQvtC0INCd0L7Rm9Cw0ZjQsCAzLCDQkdC10L7Qs9GA0LDQtCAxMTAwMA!5e0!3m2!1ssr!2srs!4v1552922638112" width="100%" height="500"></iframe>
+                </div>
+            </div>
+    </div>
+
+</div>
